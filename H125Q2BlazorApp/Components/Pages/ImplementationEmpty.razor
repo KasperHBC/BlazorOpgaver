@@ -1,0 +1,70 @@
+@page "/implementation/{Id:int}"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: @(Task?.Title ?? "Opgave")</PageTitle>
+
+@if (Task == null)
+{
+    <div class="alert alert-danger">
+        Opgaven blev ikke fundet!
+    </div>
+    <button class="btn btn-primary" @onclick="GoToTasks">Tilbage til oversigten</button>
+}
+else
+{
+    <h1>Implementering: @Task.Title</h1>
+
+    <div class="alert alert-info mb-4">
+        <h4>Opgaveinfo</h4>
+        <p>@Task.Description</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Din implementering</h5>
+        </div>
+        <div class="card-body">
+            @* 
+              Hints:
+              @Task.Hints
+            *@
+            
+            @* Skriv din kode herunder *@
+            <p>Din implementering skal være her.</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private H125Q2BlazorApp.Models.Task? Task;
+
+    protected override void OnInitialized()
+    {
+        Task = TaskService.GetTaskById(Id);
+        
+        // Specielle implementeringer har sine egne sider
+        if (Id == 1)
+        {
+            NavigationManager.NavigateTo($"/implementation/1");
+        }
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo($"/task/{Id}");
+    }
+
+    private void GoToTasks()
+    {
+        NavigationManager.NavigateTo("/tasks");
+    }
+} 

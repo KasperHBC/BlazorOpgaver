@@ -1,0 +1,53 @@
+@page "/student/26"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 26: Søge- og filterbar produktliste</PageTitle>
+
+<h1>Opgave 26: Søge- og filterbar produktliste</h1>
+
+@{
+    var task = TaskService.GetTaskById(26);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Bruge ProductService til at få adgang til produkter fra Opgave 25</li>
+            <li>Oprette et søgefelt med to-vejs binding til en søgeterm</li>
+            <li>Bruge @@bind-value:event="oninput" til at opdatere søgningen i realtid</li>
+            <li>Oprette en kategori-dropdown til filtrering</li>
+            <li>Implementere LINQ filtrering baseret på både søgeterm og kategori</li>
+            <li>Vise resultaterne i et grid eller liste</li>
+            <li>Håndtere situationen når der ikke er resultater</li>
+        </ol>
+        
+        <p class="alert alert-warning">Bemærk: For at teste denne opgave skal du først oprette nogle produkter i Opgave 25.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/26");
+    }
+} 

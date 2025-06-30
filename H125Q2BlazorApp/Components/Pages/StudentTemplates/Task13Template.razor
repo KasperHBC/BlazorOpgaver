@@ -1,0 +1,112 @@
+@page "/student/13"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 13: Nedtællingstimer.
+    
+    Du skal lave en komponent, der fungerer som en nedtællingstimer.
+    Brugeren skal kunne indstille et antal sekunder og starte timeren.
+    Timeren tæller ned hvert sekund og viser den resterende tid.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 13: Nedtællingstimer</PageTitle>
+
+<h1>Opgave 13: Nedtællingstimer</h1>
+
+@{
+    var task = TaskService.GetTaskById(13);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 13 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. inputfelt til at indstille antal sekunder,
+    knapper til at starte og stoppe timeren, og en visning af den resterende tid.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private int tidTilbage = 0;
+    // private System.Timers.Timer? timerObj;
+    // private bool erTimerIGang = false;
+    
+    // protected override void OnInitialized()
+    // {
+    //     timerObj = new System.Timers.Timer(1000);
+    //     timerObj.Elapsed += TimerTick;
+    //     timerObj.AutoReset = true;
+    // }
+    
+    // private void StartTimer()
+    // {
+    //     if (tidTilbage <= 0) return;
+    //     erTimerIGang = true;
+    //     timerObj?.Start();
+    // }
+    
+    // private void StopTimer()
+    // {
+    //     erTimerIGang = false;
+    //     timerObj?.Stop();
+    // }
+    
+    // private void NulstilTimer()
+    // {
+    //     StopTimer();
+    //     tidTilbage = 0;
+    // }
+    
+    // private void TimerTick(object? sender, System.Timers.ElapsedEventArgs e)
+    // {
+    //     tidTilbage--;
+    //     
+    //     if (tidTilbage <= 0)
+    //     {
+    //         tidTilbage = 0;
+    //         StopTimer();
+    //     }
+    //     
+    //     InvokeAsync(StateHasChanged);
+    // }
+    
+    // // Husk at implementere IDisposable for at rydde op efter timeren
+    // public void Dispose()
+    // {
+    //     timerObj?.Dispose();
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/13");
+    }
+} 

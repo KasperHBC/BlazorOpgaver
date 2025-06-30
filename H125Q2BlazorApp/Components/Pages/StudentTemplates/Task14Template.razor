@@ -1,0 +1,112 @@
+@page "/student/14"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 14: Enkelt Formular med Validering.
+    
+    Du skal lave en simpel formular med validering, f.eks. en "kontakt os" eller login-formular.
+    Formularen skal validere inputfelterne og vise fejlbeskeder for ugyldige felter.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 14: Enkelt Formular med Validering</PageTitle>
+
+<h1>Opgave 14: Enkelt Formular med Validering</h1>
+
+@{
+    var task = TaskService.GetTaskById(14);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 14 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. en formular med inputfelter for navn og email,
+    knap til at indsende formularen, og fejlbeskeder der vises ved validering.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string navn = "";
+    // private string email = "";
+    // private string fejlbeskedNavn = "";
+    // private string fejlbeskedEmail = "";
+    // private bool formularGyldig = false;
+    // private bool formularIndsendt = false;
+    
+    // private void ValiderFormular()
+    // {
+    //     fejlbeskedNavn = "";
+    //     fejlbeskedEmail = "";
+    //     formularGyldig = true;
+    //     
+    //     if (string.IsNullOrWhiteSpace(navn))
+    //     {
+    //         fejlbeskedNavn = "Navn er påkrævet";
+    //         formularGyldig = false;
+    //     }
+    //     
+    //     if (string.IsNullOrWhiteSpace(email))
+    //     {
+    //         fejlbeskedEmail = "Email er påkrævet";
+    //         formularGyldig = false;
+    //     }
+    //     else if (!email.Contains("@"))
+    //     {
+    //         fejlbeskedEmail = "Email skal indeholde @";
+    //         formularGyldig = false;
+    //     }
+    // }
+    
+    // private void IndsendFormular()
+    // {
+    //     ValiderFormular();
+    //     if (formularGyldig)
+    //     {
+    //         formularIndsendt = true;
+    //     }
+    // }
+    
+    // private void Nulstil()
+    // {
+    //     navn = "";
+    //     email = "";
+    //     fejlbeskedNavn = "";
+    //     fejlbeskedEmail = "";
+    //     formularGyldig = false;
+    //     formularIndsendt = false;
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/14");
+    }
+} 

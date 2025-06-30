@@ -1,0 +1,117 @@
+@page "/solutions/23"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using H125Q2BlazorApp.Components.Shared
+
+<PageTitle>Implementering: Produkt-entitet og dummy-liste</PageTitle>
+
+<h1>Implementering: Produkt-entitet og dummy-liste</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer hvordan man kan definere en model-klasse i C# og bruge den sammen med komponenter i Blazor.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">Produktoversigt</h5>
+        <span class="badge bg-primary">@produkter.Count produkter</span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach (var produkt in produkter)
+            {
+                <div class="col-md-4 mb-4">
+                    <Card 
+                        Titel="@produkt.Title" 
+                        Beskrivelse="@($"Pris: {produkt.Price:C}")" 
+                        BilledeUrl="@produkt.ImageUrl">
+                        <button class="btn btn-sm btn-primary" @onclick="() => VisProduktDetaljer(produkt.Id)">
+                            Se detaljer
+                        </button>
+                    </Card>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (valgtProdukt != null)
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Produktdetaljer</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@valgtProdukt.ImageUrl" alt="@valgtProdukt.Title" class="img-fluid rounded" />
+                </div>
+                <div class="col-md-8">
+                    <h3>@valgtProdukt.Title</h3>
+                    <p class="lead text-primary mb-4">@valgtProdukt.Price.ToString("C")</p>
+                    <p>Dette er et eksempel på produkt-detaljevisning, hvor mere information kan vises.</p>
+                    <p>Produkt ID: @valgtProdukt.Id</p>
+                    <button class="btn btn-secondary" @onclick="() => valgtProdukt = null">Luk detaljer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private List<Product> produkter = new();
+    private Product? valgtProdukt = null;
+    
+    protected override void OnInitialized()
+    {
+        // Initialiser med nogle dummy-produkter
+        produkter = new List<Product>
+        {
+            new Product 
+            { 
+                Id = 1, 
+                Title = "Bærbar computer", 
+                Price = 6999.95m, 
+                ImageUrl = "https://picsum.photos/id/0/200" 
+            },
+            new Product 
+            { 
+                Id = 2, 
+                Title = "Kamera", 
+                Price = 3499.50m, 
+                ImageUrl = "https://picsum.photos/id/250/200" 
+            },
+            new Product 
+            { 
+                Id = 3, 
+                Title = "Smart Watch", 
+                Price = 1899.95m, 
+                ImageUrl = "https://picsum.photos/id/160/200" 
+            }
+        };
+    }
+    
+    private void VisProduktDetaljer(int id)
+    {
+        valgtProdukt = produkter.FirstOrDefault(p => p.Id == id);
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/23");
+    }
+    
+    // Produkt model-klasse
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
+    }
+} 

@@ -1,0 +1,109 @@
+@page "/student/12"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 12: Modal Dialog Komponent.
+    
+    Du skal lave en modal dialogboks, der vises når brugeren klikker på en knap.
+    Dialogen skal have en overskrift, noget tekst, og en luk-knap.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 12: Modal Dialog Komponent</PageTitle>
+
+<h1>Opgave 12: Modal Dialog Komponent</h1>
+
+@{
+    var task = TaskService.GetTaskById(12);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 12 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. en knap der viser modalen,
+    og en hidden div der indeholder selve modalen.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+<style>
+    /* Style til din modal kan indsættes her, f.eks.:
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    .modal-dialog {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    */
+</style>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private bool viserModal = false;
+    
+    // private void VisModal()
+    // {
+    //     viserModal = true;
+    // }
+    
+    // private void LukModal()
+    // {
+    //     viserModal = false;
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/12");
+    }
+} 

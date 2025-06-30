@@ -1,0 +1,86 @@
+@page "/solutions/3"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Skift Baggrundsfarve</PageTitle>
+
+<h1>Implementering: Skift Baggrundsfarve</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent med en knap, der ændrer baggrundsfarven på komponenten, hver gang man klikker. Farven kan skifte mellem et sæt forudbestemte farver (fx rød, grøn, blå, gul) eller til en tilfældig farve.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div style="background-color: @baggrundsFarve; padding: 50px; border-radius: 5px; transition: background-color 0.3s;">
+            <h4 class="text-center">Baggrundsfarven er: @baggrundsFarve</h4>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary me-2" @onclick="SkiftFarve">Skift farve</button>
+                <button class="btn btn-secondary" @onclick="GenererTilfældigFarve">Tilfældig farve</button>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <p>Tilgængelige farver:</p>
+            <div class="d-flex flex-wrap">
+                @foreach (var farve in farver)
+                {
+                    <div style="background-color: @farve; width: 50px; height: 50px; margin: 5px; border-radius: 5px;" 
+                         @onclick="() => VælgFarve(farve)" 
+                         title="@farve">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private List<string> farver = new List<string> { 
+        "#ff0000", // Rød
+        "#00ff00", // Grøn
+        "#0000ff", // Blå
+        "#ffff00", // Gul
+        "#ff00ff", // Magenta
+        "#00ffff", // Cyan
+        "#ff8800", // Orange
+        "#8800ff"  // Lilla
+    };
+    
+    private string baggrundsFarve = "#ffffff"; // Start med hvid
+    private int farveIndeks = 0;
+    private Random random = new Random();
+    
+    private void SkiftFarve()
+    {
+        farveIndeks = (farveIndeks + 1) % farver.Count;
+        baggrundsFarve = farver[farveIndeks];
+    }
+    
+    private void GenererTilfældigFarve()
+    {
+        byte[] rgb = new byte[3];
+        random.NextBytes(rgb);
+        baggrundsFarve = $"#{rgb[0]:X2}{rgb[1]:X2}{rgb[2]:X2}";
+    }
+    
+    private void VælgFarve(string farve)
+    {
+        baggrundsFarve = farve;
+        farveIndeks = farver.IndexOf(farve);
+        if (farveIndeks == -1) farveIndeks = 0;
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/3");
+    }
+} 

@@ -1,0 +1,150 @@
+@page "/solutions/14"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using System.ComponentModel.DataAnnotations
+
+<PageTitle>Implementering: Enkelt Formular med Validering</PageTitle>
+
+<h1>Implementering: Enkelt Formular med Validering</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en simpel formular (for eksempel en lille "kontakt os" eller login formular) med et par inputfelter og validering. Fx navn og email adresse felter, hvor navn ikke må være tomt og email skal indeholde "@@" for at være gyldig. Når brugeren trykker "Send" eller "Login", skal komponenten tjekke om felterne er korrekt udfyldt og vise en fejlbesked under de felter, der ikke er gyldige. Hvis alle felter er gyldige, kan du vise en succes-besked.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">Kontakt Formular</h5>
+    </div>
+    <div class="card-body">
+        @if (!formularIndsendt)
+        {
+            <h4 class="mb-3">Udfyld kontaktformular</h4>
+            
+            <EditForm Model="@kontaktModel" OnValidSubmit="IndsendFormular" class="mb-4">
+                <DataAnnotationsValidator />
+                
+                <div class="mb-3">
+                    <label for="navn-input" class="form-label">Navn <span class="text-danger">*</span></label>
+                    <InputText id="navn-input" 
+                               class="form-control" 
+                               placeholder="Indtast dit navn"
+                               @bind-Value="kontaktModel.Navn" />
+                    <ValidationMessage For="@(() => kontaktModel.Navn)" />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="email-input" class="form-label">Email <span class="text-danger">*</span></label>
+                    <InputText id="email-input" 
+                               class="form-control" 
+                               placeholder="eksempel@mail.dk"
+                               @bind-Value="kontaktModel.Email" />
+                    <ValidationMessage For="@(() => kontaktModel.Email)" />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="besked-input" class="form-label">Besked</label>
+                    <InputTextArea id="besked-input" 
+                              class="form-control" 
+                              rows="4"
+                              placeholder="Skriv din besked her..."
+                              @bind-Value="kontaktModel.Besked" />
+                    <ValidationMessage For="@(() => kontaktModel.Besked)" />
+                </div>
+                
+                <div class="form-check mb-3">
+                    <InputCheckbox id="godkend-check" class="form-check-input" @bind-Value="kontaktModel.GodkendBetingelser" />
+                    <label class="form-check-label" for="godkend-check">
+                        Jeg accepterer betingelserne
+                    </label>
+                    <ValidationMessage For="@(() => kontaktModel.GodkendBetingelser)" />
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Send besked</button>
+                    <button type="button" class="btn btn-secondary" @onclick="Nulstil">Nulstil</button>
+                </div>
+            </EditForm>
+        }
+        else
+        {
+            <div class="alert alert-success">
+                <h4 class="alert-heading">Tak for din besked!</h4>
+                <p>Din besked er blevet sendt succesfuldt. Vi vil behandle den hurtigst muligt.</p>
+                <hr>
+                <h5>De indtastede oplysninger:</h5>
+                <p><strong>Navn:</strong> @kontaktModel.Navn</p>
+                <p><strong>Email:</strong> @kontaktModel.Email</p>
+                @if (!string.IsNullOrEmpty(kontaktModel.Besked))
+                {
+                    <p><strong>Besked:</strong> @kontaktModel.Besked</p>
+                }
+                
+                <div class="mt-3">
+                    <button class="btn btn-primary" @onclick="Nulstil">Send en ny besked</button>
+                </div>
+            </div>
+        }
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Om formularen</h5>
+            </div>
+            <div class="card-body">
+                <p>Dette er en implementering af en kontaktformular med Blazors indbyggede formularhåndtering:</p>
+                <ul>
+                    <li>Bruger <code>EditForm</code> med <code>DataAnnotationsValidator</code> til validering</li>
+                    <li>Validering med <code>Required</code>, <code>EmailAddress</code> og andre DataAnnotations</li>
+                    <li>Benytter <code>InputText</code>, <code>InputTextArea</code> og <code>InputCheckbox</code> komponenter</li>
+                    <li>Validering sker automatisk og vises med <code>ValidationMessage</code> komponenter</li>
+                    <li>Formularen kan kun indsendes når alle felter er udfyldt korrekt</li>
+                </ul>
+                <p>Denne tilgang er den anbefalede måde at håndtere formularer i Blazor, da den giver automatic validering baseret på modellens annotations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private KontaktFormularModel kontaktModel = new();
+    private bool formularIndsendt = false;
+    
+    private void IndsendFormular()
+    {
+        formularIndsendt = true;
+        // Her ville man normalt sende data til en server
+    }
+    
+    private void Nulstil()
+    {
+        kontaktModel = new KontaktFormularModel();
+        formularIndsendt = false;
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/14");
+    }
+    
+    public class KontaktFormularModel
+    {
+        [Required(ErrorMessage = "Navn er påkrævet")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Navnet skal være mellem 2 og 50 tegn")]
+        public string Navn { get; set; } = "";
+        
+        [Required(ErrorMessage = "Email er påkrævet")]
+        [EmailAddress(ErrorMessage = "Indtast venligst en gyldig email-adresse")]
+        public string Email { get; set; } = "";
+        
+        [MinLength(10, ErrorMessage = "Beskeden skal være mindst 10 tegn")]
+        public string Besked { get; set; } = "";
+        
+        [Required(ErrorMessage = "Du skal acceptere betingelserne for at fortsætte")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Du skal acceptere betingelserne for at fortsætte")]
+        public bool GodkendBetingelser { get; set; }
+    }
+} 

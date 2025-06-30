@@ -1,0 +1,97 @@
+@page "/student/11"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 11: Stjernevurdering.
+    
+    Du skal lave en stjernevurderings-komponent med 5 stjerner. Når brugeren
+    hover over en stjerne, skal alle stjerner op til den position markeres.
+    Ved klik på en stjerne skal vurderingen gemmes.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 11: Stjernevurdering</PageTitle>
+
+<h1>Opgave 11: Stjernevurdering</h1>
+
+@{
+    var task = TaskService.GetTaskById(11);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 11 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. stjerne-ikoner der kan hover og klikkes,
+    samt en besked der viser den aktuelle rating.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private int aktuelRating = 0;
+    // private int hoverRating = 0;
+    
+    // private void HandleMouseOver(int stjerne)
+    // {
+    //     hoverRating = stjerne;
+    // }
+    
+    // private void HandleMouseOut()
+    // {
+    //     hoverRating = 0;
+    // }
+    
+    // private void SætRating(int stjerne)
+    // {
+    //     aktuelRating = stjerne;
+    // }
+    
+    // private string GetStjerneKlasse(int stjerne)
+    // {
+    //     if (hoverRating >= stjerne)
+    //     {
+    //         return "bi bi-star-fill text-warning";
+    //     }
+    //     else if (aktuelRating >= stjerne)
+    //     {
+    //         return "bi bi-star-fill text-warning";
+    //     }
+    //     else
+    //     {
+    //         return "bi bi-star text-secondary";
+    //     }
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/11");
+    }
+} 

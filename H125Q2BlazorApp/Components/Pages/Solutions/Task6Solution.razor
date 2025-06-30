@@ -1,0 +1,105 @@
+@page "/solutions/6"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Tilfældig Dyrelyd</PageTitle>
+
+<h1>Implementering: Tilfældig Dyrelyd</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en sjov komponent, der viser et tilfældigt dyr og dets "lyd" når man klikker på en knap. For eksempel kunne der være en liste af dyr ("Kat", "Hund", "Ko") og en tilsvarende liste af lyde ("Miav", "Vov", "Muh"). Når brugeren klikker "Vis dyrlyd", skal komponenten vælge et tilfældigt dyr og vise noget i stil med "En [dyr] siger [lyd]!".</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-4 text-center">
+            <button class="btn btn-lg btn-primary" @onclick="VælgTilfældigtDyr">
+                <i class="bi bi-shuffle me-2"></i> Vis en tilfældig dyrelyd
+            </button>
+        </div>
+
+        @if (!string.IsNullOrEmpty(valgtDyr))
+        {
+            <div class="alert alert-success p-4 text-center">
+                <div class="mb-3">
+                    <span class="fs-1">@GetDyreIkon(valgtDyr)</span>
+                </div>
+                <p class="fs-3 mb-0">En @valgtDyr siger <strong>@valgtLyd</strong>!</p>
+            </div>
+            
+            <div class="mt-3">
+                <h5>Tilgængelige dyr:</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var dyr in dyreLyde.Keys)
+                    {
+                        <span class="badge bg-info p-2">
+                            @GetDyreIkon(dyr) @dyr
+                        </span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private Dictionary<string, string> dyreLyde = new Dictionary<string, string>
+    {
+        { "Kat", "Miav" },
+        { "Hund", "Vov vov" },
+        { "Ko", "Muuuh" },
+        { "And", "Rap rap" },
+        { "Gris", "Øf øf" },
+        { "Får", "Mææh" },
+        { "Hest", "Vrinssk" },
+        { "Frø", "Kvæk" },
+        { "Ugle", "Hu-hu" },
+        { "Høne", "Gok gok" }
+    };
+    
+    private string valgtDyr = "";
+    private string valgtLyd = "";
+    private Random random = new Random();
+    
+    private void VælgTilfældigtDyr()
+    {
+        // Vælg et tilfældigt dyr fra Dictionary nøglerne
+        var dyr = dyreLyde.Keys.ToList();
+        int index = random.Next(dyr.Count);
+        valgtDyr = dyr[index];
+        
+        // Find den matchende lyd
+        valgtLyd = dyreLyde[valgtDyr];
+    }
+    
+    private string GetDyreIkon(string dyr)
+    {
+        return dyr.ToLower() switch
+        {
+            "kat" => "🐱",
+            "hund" => "🐶",
+            "ko" => "🐮",
+            "and" => "🦆",
+            "gris" => "🐷",
+            "får" => "🐑",
+            "hest" => "🐴",
+            "frø" => "🐸",
+            "ugle" => "🦉",
+            "høne" => "🐔",
+            _ => "🐾"
+        };
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/6");
+    }
+} 

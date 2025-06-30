@@ -1,0 +1,89 @@
+@page "/student/4"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 4: Simpel Regnemaskine.
+    
+    Du skal lave en simpel lommeregner-komponent, hvor brugeren kan indtaste to tal 
+    og vælge en operation (plus, minus, gange, dividér). 
+    Vis resultatet af beregningen, når brugeren klikker på en "Beregn" knap.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 4: Simpel Regnemaskine</PageTitle>
+
+<h1>Opgave 4: Simpel Regnemaskine</h1>
+
+@{
+    var task = TaskService.GetTaskById(4);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 4 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. to inputfelter til tal, 
+    et valgfelt til operation og en knap til at beregne resultatet.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string tal1Input = "";
+    // private string tal2Input = "";
+    // private string valgtOperation = "+";
+    // private string resultat = "";
+    
+    // Tilføj metoder her, f.eks.:
+    // private void Beregn()
+    // {
+    //     if (double.TryParse(tal1Input, out double tal1) && double.TryParse(tal2Input, out double tal2))
+    //     {
+    //         double res = 0;
+    //         switch (valgtOperation)
+    //         {
+    //             case "+": res = tal1 + tal2; break;
+    //             case "-": res = tal1 - tal2; break;
+    //             case "*": res = tal1 * tal2; break;
+    //             case "/": res = tal1 / tal2; break;
+    //         }
+    //         resultat = res.ToString();
+    //     }
+    //     else
+    //     {
+    //         resultat = "Fejl: Indtast gyldige tal";
+    //     }
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/4");
+    }
+} 

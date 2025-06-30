@@ -1,0 +1,128 @@
+@page "/solutions/4"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Simpel Regnemaskine</PageTitle>
+
+<h1>Implementering: Simpel Regnemaskine</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en simpel lommeregner-komponent, hvor brugeren kan indtaste to tal og vælge en operation (plus, minus, gange, dividér). Vis resultatet af beregningen, når brugeren klikker på en "Beregn" knap.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="tal1" class="form-label">Første tal</label>
+                <input id="tal1" type="number" class="form-control" @bind="tal1Input" />
+            </div>
+            
+            <div class="col-md-4">
+                <label for="operator" class="form-label">Operation</label>
+                <select id="operator" class="form-select" @bind="valgtOperation">
+                    <option value="+">Addition (+)</option>
+                    <option value="-">Subtraktion (-)</option>
+                    <option value="*">Multiplikation (×)</option>
+                    <option value="/">Division (÷)</option>
+                </select>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="tal2" class="form-label">Andet tal</label>
+                <input id="tal2" type="number" class="form-control" @bind="tal2Input" />
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <button class="btn btn-primary" @onclick="Beregn">Beregn resultat</button>
+        </div>
+        
+        @if (!string.IsNullOrEmpty(fejlbesked))
+        {
+            <div class="alert alert-danger mt-3">
+                @fejlbesked
+            </div>
+        }
+        
+        @if (!string.IsNullOrEmpty(resultat) && string.IsNullOrEmpty(fejlbesked))
+        {
+            <div class="alert alert-success mt-3">
+                <h4>Resultat:</h4>
+                <p class="fs-2">@formatTal1 @visOperator @formatTal2 = @resultat</p>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string tal1Input = "";
+    private string tal2Input = "";
+    private string valgtOperation = "+";
+    private string resultat = "";
+    private string fejlbesked = "";
+    
+    private string formatTal1 => string.IsNullOrEmpty(tal1Input) ? "0" : tal1Input;
+    private string formatTal2 => string.IsNullOrEmpty(tal2Input) ? "0" : tal2Input;
+    
+    private string visOperator => valgtOperation switch
+    {
+        "+" => "+",
+        "-" => "-",
+        "*" => "×",
+        "/" => "÷",
+        _ => valgtOperation
+    };
+    
+    private void Beregn()
+    {
+        fejlbesked = "";
+        
+        // Tjek om tal er indtastet
+        if (string.IsNullOrEmpty(tal1Input) || string.IsNullOrEmpty(tal2Input))
+        {
+            fejlbesked = "Venligst indtast begge tal";
+            return;
+        }
+        
+        // Konverter input til tal
+        if (!double.TryParse(tal1Input, out double tal1) || !double.TryParse(tal2Input, out double tal2))
+        {
+            fejlbesked = "Venligst indtast gyldige tal";
+            return;
+        }
+        
+        // Tjek for division med nul
+        if (valgtOperation == "/" && tal2 == 0)
+        {
+            fejlbesked = "Division med nul er ikke tilladt";
+            return;
+        }
+        
+        // Udfør beregningen
+        double res = valgtOperation switch
+        {
+            "+" => tal1 + tal2,
+            "-" => tal1 - tal2,
+            "*" => tal1 * tal2,
+            "/" => tal1 / tal2,
+            _ => 0
+        };
+        
+        // Formatér resultatet (f.eks. fjern unødvendige decimaler)
+        resultat = res % 1 == 0 ? res.ToString("F0") : res.ToString("F2");
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/4");
+    }
+} 

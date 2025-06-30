@@ -1,0 +1,148 @@
+@page "/solutions/9"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Gæt et Tal</PageTitle>
+
+<h1>Implementering: Gæt et Tal</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav et simpelt "Gæt et tal" spil. Applikationen skal vælge et tilfældigt heltal mellem 1 og 100 (uden at vise det). Brugeren skal så indtaste gæt i et tekstfelt. Når brugeren gætter, viser app'en om gættet er for højt, for lavt, eller korrekt. Hvis det er korrekt, kan du give en succes-besked og måske mulighed for at starte et nyt spil (generere et nyt tal).</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-4">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <label for="guess-input" class="form-label">Gæt et tal mellem 1 og 100:</label>
+                    <div class="input-group">
+                        <input id="guess-input" 
+                               type="number" 
+                               class="form-control" 
+                               placeholder="Indtast dit gæt"
+                               min="1"
+                               max="100"
+                               @bind="brugerGæt" 
+                               @bind:event="oninput"
+                               disabled="@spilVundet" />
+                        <button class="btn btn-primary" @onclick="CheckGæt" disabled="@(spilVundet || brugerGæt < 1)">
+                            <i class="bi bi-check-circle me-1"></i> Gæt
+                        </button>
+                    </div>
+                    <div class="form-text">
+                        Antal forsøg: @antalForsøg
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <button class="btn btn-success w-100" @onclick="StartNytSpil">
+                        <i class="bi bi-arrow-repeat me-1"></i> Start nyt spil
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feedback område -->
+        @if (!string.IsNullOrEmpty(besked))
+        {
+            <div class="alert @beskedKlasse mt-4">
+                <h4><i class="@beskedIkon me-2"></i>@besked</h4>
+                @if (spilVundet)
+                {
+                    <p>Tillykke! Du gættede det rigtige tal på @antalForsøg forsøg.</p>
+                    <button class="btn btn-success" @onclick="StartNytSpil">
+                        <i class="bi bi-arrow-repeat me-1"></i> Spil igen
+                    </button>
+                }
+            </div>
+        }
+        
+        <!-- Hjælpetips -->
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Spillets regler</h5>
+                </div>
+                <div class="card-body">
+                    <p>Dette er et simpelt "Gæt et tal" spil med følgende regler:</p>
+                    <ul>
+                        <li>Computeren vælger et tilfældigt tal mellem 1 og 100.</li>
+                        <li>Din opgave er at gætte tallet med så få forsøg som muligt.</li>
+                        <li>Efter hvert gæt fortæller computeren dig, om dit gæt er for højt, for lavt eller korrekt.</li>
+                        <li>Brug feedback til at snævre dit næste gæt ind.</li>
+                        <li>Når du har gættet tallet, kan du starte et nyt spil.</li>
+                    </ul>
+                    <p>Tip: Den bedste strategi er at halvere søgeområdet hver gang - dette kaldes binær søgning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private int hemmeligtTal;
+    private int brugerGæt;
+    private string besked = "";
+    private int antalForsøg = 0;
+    private bool spilVundet = false;
+    
+    // Styling-variabler
+    private string beskedKlasse = "";
+    private string beskedIkon = "";
+    
+    protected override void OnInitialized()
+    {
+        StartNytSpil();
+    }
+    
+    private void StartNytSpil()
+    {
+        Random rnd = new Random();
+        hemmeligtTal = rnd.Next(1, 101); // Vælger et tal mellem 1 og 100
+        brugerGæt = 0;
+        antalForsøg = 0;
+        besked = "";
+        spilVundet = false;
+    }
+    
+    private void CheckGæt()
+    {
+        if (brugerGæt < 1 || brugerGæt > 100) return;
+        
+        antalForsøg++;
+        
+        if (brugerGæt < hemmeligtTal)
+        {
+            besked = "For lavt!";
+            beskedKlasse = "alert-warning";
+            beskedIkon = "bi bi-arrow-up";
+        }
+        else if (brugerGæt > hemmeligtTal)
+        {
+            besked = "For højt!";
+            beskedKlasse = "alert-danger";
+            beskedIkon = "bi bi-arrow-down";
+        }
+        else
+        {
+            besked = "Korrekt!";
+            beskedKlasse = "alert-success";
+            beskedIkon = "bi bi-trophy";
+            spilVundet = true;
+        }
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/9");
+    }
+} 

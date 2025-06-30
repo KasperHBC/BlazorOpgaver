@@ -1,0 +1,51 @@
+@page "/student/22"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 22: Min profil-kort</PageTitle>
+
+<h1>Opgave 22: Min profil-kort</h1>
+
+@{
+    var task = TaskService.GetTaskById(22);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Injicere AuthenticationStateProvider i din komponent</li>
+            <li>Kalde GetAuthenticationStateAsync() for at få brugerens claims</li>
+            <li>Hente og vise brugerens navn, email og andre relevante claims</li>
+            <li>Implementere fallback indhold når brugeren ikke er logget ind</li>
+            <li>Eventuelt vise forskellige UI-elementer baseret på brugerens rolle</li>
+        </ol>
+        
+        <p>Bemærk: I et demo-miljø kan det være, at der ikke er nogen reel authentication implementeret. I så fald kan du tilføje en "Simuler login" funktion til demonstrationsformål.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/22");
+    }
+} 

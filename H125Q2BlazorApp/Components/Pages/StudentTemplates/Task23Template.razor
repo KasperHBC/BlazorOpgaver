@@ -1,0 +1,59 @@
+@page "/student/23"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 23: Produkt-entitet og dummy-liste</PageTitle>
+
+<h1>Opgave 23: Produkt-entitet og dummy-liste</h1>
+
+@{
+    var task = TaskService.GetTaskById(23);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>
+                Opret en ny C#-klasse Product i Models-mappen med følgende properties:
+                <ul>
+                    <li>int Id</li>
+                    <li>string Title</li>
+                    <li>decimal Price</li>
+                    <li>string ImageUrl</li>
+                </ul>
+            </li>
+            <li>Opret en liste med 3 hardcodede produkt-objekter i din komponent</li>
+            <li>Brug dit Card-komponent fra opgave 19 til at vise disse produkter</li>
+            <li>Implementer en foreach-løkke til at rendere kortene</li>
+            <li>Sørg for at vise titlen, prisen og billedet fra hvert produkt i kortene</li>
+        </ol>
+        
+        <p>Tip: Brug Card-komponenten fra opgave 19. Hvis du ikke allerede har implementeret den, kan du starte med at løse opgave 19 først.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/23");
+    }
+} 

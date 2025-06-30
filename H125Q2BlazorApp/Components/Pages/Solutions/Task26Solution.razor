@@ -1,0 +1,203 @@
+@page "/solutions/26"
+@rendermode InteractiveServer
+@using H125Q2BlazorApp.Models
+@using H125Q2BlazorApp.Services
+@inject NavigationManager NavigationManager
+@inject ProductService ProductService
+
+<PageTitle>Implementering: Søge- og filterbar produktliste</PageTitle>
+
+<h1>Implementering: Søge- og filterbar produktliste</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer real-time filtrering af data baseret på brugerens input via two-way binding og LINQ filtrering.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">Produktsøgning</h5>
+        <a href="/solutions/25" class="btn btn-sm btn-outline-primary">+ Tilføj produkter</a>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Søg efter produkter..." 
+                           @bind-value="searchTerm" 
+                           @bind-value:event="oninput" />
+                    @if (!string.IsNullOrEmpty(searchTerm))
+                    {
+                        <button class="btn btn-outline-secondary" type="button" @onclick="ClearSearch">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <select class="form-select" @bind="selectedCategory">
+                    <option value="Alle">Alle kategorier</option>
+                    @foreach (var category in ProductService.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+        </div>
+        
+        @if (filteredProducts.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Billede</th>
+                            <th>Titel</th>
+                            <th>Kategori</th>
+                            <th>Pris</th>
+                            <th>Beskrivelse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in filteredProducts)
+                        {
+                            <tr class="align-middle">
+                                <td>
+                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                    {
+                                        <img src="@product.ImageUrl" alt="@product.Title" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;" />
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-image text-muted"></i>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    <strong>@product.Title</strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary">@product.Category</span>
+                                </td>
+                                <td>
+                                    <span class="text-primary fw-bold">@product.Price.ToString("C")</span>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(product.Description))
+                                    {
+                                        <span>@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="text-end mt-2">
+                <small class="text-muted">Viser @filteredProducts.Count af @allProducts.Count produkter</small>
+            </div>
+        }
+        else
+        {
+            <div class="text-center p-5">
+                @if (allProducts.Count == 0)
+                {
+                    <div>
+                        <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Ingen produkter fundet</h5>
+                        <p>Der er endnu ikke tilføjet nogen produkter. Gå til "Opret-annonce" siden for at tilføje produkter.</p>
+                        <a href="/solutions/25" class="btn btn-primary mt-2">
+                            Tilføj produkter
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3">Ingen resultater fundet</h5>
+                        <p>Din søgning gav ingen resultater. Prøv at ændre søgeterm eller vælg en anden kategori.</p>
+                        <button class="btn btn-outline-secondary mt-2" @onclick="ResetFilters">
+                            Nulstil filtre
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string searchTerm = "";
+    private string selectedCategory = "Alle";
+    private List<Product> allProducts = new();
+    private List<Product> filteredProducts = new();
+    
+    protected override void OnInitialized()
+    {
+        // Hent produkter fra service
+        allProducts = ProductService.GetAllProducts();
+        ApplyFilters();
+    }
+    
+    private void ApplyFilters()
+    {
+        // Filtrer produkter baseret på søgeterm og valgt kategori
+        filteredProducts = allProducts
+            .Where(p => 
+                (string.IsNullOrEmpty(searchTerm) || p.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || 
+                 (p.Description != null && p.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))) &&
+                (selectedCategory == "Alle" || p.Category == selectedCategory))
+            .ToList();
+    }
+    
+    private void ClearSearch()
+    {
+        searchTerm = "";
+        ApplyFilters();
+    }
+    
+    private void ResetFilters()
+    {
+        searchTerm = "";
+        selectedCategory = "Alle";
+        ApplyFilters();
+    }
+    
+    // Vi implementerer setters for properties, så vi kan opdatere filtrene når værdierne ændres
+    private string SearchTerm
+    {
+        get => searchTerm;
+        set
+        {
+            searchTerm = value;
+            ApplyFilters();
+        }
+    }
+    
+    private string SelectedCategory
+    {
+        get => selectedCategory;
+        set
+        {
+            selectedCategory = value;
+            ApplyFilters();
+        }
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/26");
+    }
+} 

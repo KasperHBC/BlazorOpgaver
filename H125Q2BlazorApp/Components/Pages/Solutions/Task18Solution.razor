@@ -1,0 +1,88 @@
+@page "/solutions/18"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@inject H125Q2BlazorApp.Services.ThemeService ThemeService
+@implements IDisposable
+
+<PageTitle>Implementering: Tema Skifter</PageTitle>
+
+<div>
+    <h1>Implementering: Tema Skifter</h1>
+
+    <div class="alert alert-info mb-4">
+        <h4>Opgaveinfo</h4>
+        <p>Denne opgave demonstrerer hvordan man kan implementere et tema-system i Blazor.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Tema Kontrol</h5>
+                </div>
+                <div class="card-body">
+                    <p>Nuværende tema: <strong>@(ThemeService.MørktTema ? "Mørkt" : "Lyst")</strong></p>
+                    <button class="btn btn-primary" @onclick="SkiftTemaAsync">
+                        Skift til @(ThemeService.MørktTema ? "lyst" : "mørkt") tema
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Tema Demo</h5>
+                </div>
+                <div class="card-body">
+                    <p>Dette er en demo af hvordan temaet påvirker forskellige komponenter:</p>
+                    <div class="btn-group mb-3">
+                        <button class="btn btn-primary">Primær knap</button>
+                        <button class="btn btn-secondary">Sekundær knap</button>
+                        <button class="btn btn-info">Info knap</button>
+                    </div>
+                    <div class="alert alert-info">
+                        Dette er en info-besked
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+    </div>
+</div>
+
+@code {
+    private bool _themeApplied = false;
+
+    protected override void OnInitialized()
+    {
+        ThemeService.OnThemeChanged += StateHasChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_themeApplied)
+        {
+            await ThemeService.ApplyThemeAsync();
+            _themeApplied = true;
+        }
+    }
+
+    private async Task SkiftTemaAsync()
+    {
+        await ThemeService.SkiftTemaAsync();
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= StateHasChanged;
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/18");
+    }
+} 

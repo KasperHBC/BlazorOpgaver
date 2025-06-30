@@ -1,0 +1,68 @@
+@page "/solutions/2"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Komplimentknap</PageTitle>
+
+<h1>Implementering: Komplimentknap</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en knap, der giver brugeren et tilfældigt kompliment, hver gang den klikkes. Forbered en liste over sjove eller positive komplimenter. Når brugeren klikker på knappen, skal et nyt kompliment fra listen vises på skærmen.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        @* 
+          Hints:
+          1. Opret en liste (fx List<string>) med forskellige komplimenter i komponentens kode.
+          2. Brug klassen Random til at vælge et tilfældigt indeks fra listen, når knappen klikkes.
+          3. Gem det valgte kompliment i en variabel og vis det i markup (fx i et <p> element).
+        *@
+
+        <div>
+            <button @onclick="VisKompliment">Giv mig et kompliment!</button>
+        </div>
+
+        @if (!string.IsNullOrEmpty(kompliment))
+        {
+            <p class="mt-3">@kompliment</p>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string kompliment = "";
+    private List<string> komplimenter = new List<string> {
+        "Du skriver kode som en mester!",
+        "Din debugging-evne er superhelte-værdig!",
+        "Dit talent for programmering er imponerende!",
+        "Du løser problemer hurtigere end en kop kaffe bliver kold!",
+        "Din kode er så elegant, at den fortjener en poesipris!",
+        "Du er en sand Blazor-troldmand!",
+        "Din logiske tankegang er skarpere end en ny kniv!",
+        "Dine algoritmer er hurtigere end lysets hastighed!",
+        "Din kode er så ren, at den burde undervises på universiteter!",
+        "Du har en naturlig evne til at forstå komplekse koncepter!"
+    };
+    
+    private Random random = new Random();
+
+    private void VisKompliment()
+    {
+        int index = random.Next(komplimenter.Count);
+        kompliment = komplimenter[index];
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/2");
+    }
+} 

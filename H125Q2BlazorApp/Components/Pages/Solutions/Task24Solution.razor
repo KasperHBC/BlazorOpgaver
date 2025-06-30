@@ -1,0 +1,204 @@
+@page "/solutions/24"
+@rendermode InteractiveServer
+@using System.IO
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment Environment
+
+<PageTitle>Implementering: Upload billede til wwwroot</PageTitle>
+
+<h1>Implementering: Upload billede til wwwroot</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer hvordan man kan håndtere fil-upload i Blazor, gemme filen i wwwroot-mappen, og vise et preview af den uploadede fil.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">Billeduploader</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Vælg billede</h5>
+                <div class="mb-3">
+                    <InputFile OnChange="UploadFile" class="form-control" accept="image/*" />
+                    <div class="form-text">Vælg et billede fra din computer. Kun billedfiler er tilladt.</div>
+                </div>
+                
+                @if (isUploading)
+                {
+                    <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" 
+                             style="width: @uploadProgress%" 
+                             aria-valuenow="@uploadProgress" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            @uploadProgress%
+                        </div>
+                    </div>
+                }
+                
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-danger">
+                        <strong>Fejl:</strong> @errorMessage
+                    </div>
+                }
+                
+                @if (!string.IsNullOrEmpty(successMessage))
+                {
+                    <div class="alert alert-success">
+                        <strong>Succes!</strong> @successMessage
+                    </div>
+                }
+                
+                <div class="mt-3">
+                    <button class="btn btn-primary" @onclick="ResetForm" disabled="@isUploading">
+                        Upload nyt billede
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h5>Preview</h5>
+                @if (!string.IsNullOrEmpty(uploadedImagePath))
+                {
+                    <div class="card">
+                        <div class="card-body text-center p-4">
+                            <img src="@uploadedImagePath" alt="Uploaded" class="img-fluid rounded" style="max-height: 300px;" />
+                            <div class="mt-3">
+                                <p><strong>Filnavn:</strong> @Path.GetFileName(uploadedImagePath)</p>
+                                <a href="@uploadedImagePath" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    Åbn i nyt vindue
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-secondary text-center py-5">
+                        <i class="bi bi-image" style="font-size: 48px;"></i>
+                        <p class="mt-3">Intet billede uploadet endnu.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string? uploadedImagePath;
+    private bool isUploading = false;
+    private int uploadProgress = 0;
+    private string? errorMessage;
+    private string? successMessage;
+    
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            // Nulstil tidligere beskeder og sæt uploading tilstand
+            errorMessage = null;
+            successMessage = null;
+            isUploading = true;
+            uploadProgress = 0;
+            
+            // Sikkerhedstjek
+            var file = e.File;
+            if (file == null)
+            {
+                errorMessage = "Ingen fil valgt";
+                isUploading = false;
+                return;
+            }
+            
+            // Kontroller filtype (kun billeder)
+            if (!file.ContentType.StartsWith("image/"))
+            {
+                errorMessage = "Kun billedfiler er tilladt";
+                isUploading = false;
+                return;
+            }
+            
+            // Kontrollér filstørrelse (maks 5 MB)
+            if (file.Size > 5 * 1024 * 1024)
+            {
+                errorMessage = "Filen er for stor. Maksimal størrelse er 5 MB";
+                isUploading = false;
+                return;
+            }
+            
+            // Generer unikt filnavn
+            var extension = Path.GetExtension(file.Name);
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            
+            // Sørg for at uploads-mappen eksisterer
+            var uploadsFolder = Path.Combine(Environment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            
+            // Fuld sti til den nye fil
+            var filePath = Path.Combine(uploadsFolder, fileName);
+            
+            // Gem filen - læs fra stream og vis en progressbar
+            await using var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
+            await using var fs = new FileStream(filePath, FileMode.Create);
+            
+            // Opret buffer til at læse filen i små bidder og vise fremskridt
+            var buffer = new byte[4096];
+            long totalRead = 0;
+            int bytesRead;
+            
+            // Læs og skriv i bidder
+            while ((bytesRead = await stream.ReadAsync(buffer)) > 0)
+            {
+                await fs.WriteAsync(buffer.AsMemory(0, bytesRead));
+                totalRead += bytesRead;
+                
+                // Beregn og opdater fremskridt
+                uploadProgress = (int)(totalRead * 100 / file.Size);
+                StateHasChanged(); // Opdater UI
+                
+                // Tilføj en lille forsinkelse for at simulere upload på hurtige maskiner
+                await Task.Delay(10);
+            }
+            
+            // Vis stien til den uploadede fil (relativ URL til wwwroot)
+            uploadedImagePath = $"/uploads/{fileName}";
+            successMessage = "Billedet blev uploadet";
+            
+            // Upload færdig
+            uploadProgress = 100;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Fejl under upload: {ex.Message}";
+        }
+        finally
+        {
+            isUploading = false;
+        }
+    }
+    
+    private void ResetForm()
+    {
+        uploadedImagePath = null;
+        errorMessage = null;
+        successMessage = null;
+        uploadProgress = 0;
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/24");
+    }
+} 

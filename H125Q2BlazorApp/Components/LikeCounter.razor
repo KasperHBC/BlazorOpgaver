@@ -1,0 +1,20 @@
+@rendermode InteractiveServer
+
+<button class="btn @ButtonClass" @onclick="AddLike">
+    @Icon @antalLikes
+</button>
+
+@code {
+    [Parameter]
+    public string Icon { get; set; } = "👍";
+    
+    [Parameter]
+    public string ButtonClass { get; set; } = "btn-outline-primary";
+    
+    private int antalLikes = 0;
+    
+    private void AddLike()
+    {
+        antalLikes++;
+    }
+} 

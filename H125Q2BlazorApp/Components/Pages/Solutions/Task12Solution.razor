@@ -1,0 +1,180 @@
+@page "/solutions/12"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Modal Dialog Komponent</PageTitle>
+
+<h1>Implementering: Modal Dialog Komponent</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en simpel modal dialog komponent. En modal er en pop-op boks der vises oven på siden. Lav fx en komponent der indeholder en skjult dialogboks med en overskrift, noget tekst og en luk-knap. På siden skal der være en "Vis info" knap, der får modalen til at dukke op (fx med lidt gennemsigtig baggrund bagved). Når man klikker "Luk" i modalen, skal den forsvinde igen.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex gap-2 mb-4">
+            <button class="btn btn-primary" @onclick="VisInfoModal">
+                <i class="bi bi-info-circle me-2"></i>Vis info
+            </button>
+            <button class="btn btn-success" @onclick="VisSuccesModal">
+                <i class="bi bi-check-circle me-2"></i>Vis success
+            </button>
+            <button class="btn btn-danger" @onclick="VisAdvarselModal">
+                <i class="bi bi-exclamation-triangle me-2"></i>Vis advarsel
+            </button>
+        </div>
+        
+        @if (visModal)
+        {
+            <div class="modal-overlay" @onclick="LukModal">
+                <div class="modal-dialog" @onclick:stopPropagation="true">
+                    <div class="modal-header">
+                        <h4 class="m-0">@modalTitel</h4>
+                        <button type="button" class="btn-close" @onclick="LukModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>@modalIndhold</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="LukModal">Luk</button>
+                        @if (!string.IsNullOrEmpty(modalHandling))
+                        {
+                            <button type="button" class="btn btn-primary" @onclick="ModalHandling">@modalHandling</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Funktionalitetsforklaring</h5>
+            </div>
+            <div class="card-body">
+                <p>Dette er en enkel modal dialog implementering, der viser en popup-boks med:</p>
+                <ul>
+                    <li>En titelbar med overskrift og luk-knap</li>
+                    <li>Et indholdsfelt med tekst</li>
+                    <li>En footer med knapper (Luk + evt. en handlingsknap)</li>
+                </ul>
+                <p>Modalens indhold bestemmes af, hvilken knap man trykker på.</p>
+                <p>Modalen vises ved at sætte <code>visModal = true</code> og lukkes ved at sætte <code>visModal = false</code>.</p>
+                <p>Du kan nemt genbruge denne modal-komponent ved at ændre titlen og indholdet dynamisk.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+<style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        pointer-events: all;
+    }
+    
+    .modal-dialog {
+        background-color: white;
+        border-radius: 5px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: modalFadeIn 0.3s;
+        z-index: 1001;
+        pointer-events: auto;
+        overflow: visible;
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-footer {
+        padding: 15px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+    
+    .btn-close, .btn {
+        cursor: pointer;
+        pointer-events: auto;
+    }
+    
+    @@keyframes modalFadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+@code {
+    private bool visModal = false;
+    private string modalTitel = "";
+    private string modalIndhold = "";
+    private string modalHandling = "";
+    
+    private void VisInfoModal()
+    {
+        modalTitel = "Information";
+        modalIndhold = "Dette er en informations-modal, der kan bruges til at vise vigtig information til brugeren. Den er simpel at bruge og kan lukkes ved at klikke på Luk-knappen eller udenfor modalen.";
+        modalHandling = "Forstået";
+        visModal = true;
+    }
+    
+    private void VisSuccesModal()
+    {
+        modalTitel = "Success!";
+        modalIndhold = "Handlingen blev gennemført med succes. Alt gik som planlagt, og dataene er blevet gemt.";
+        modalHandling = "OK";
+        visModal = true;
+    }
+    
+    private void VisAdvarselModal()
+    {
+        modalTitel = "Advarsel!";
+        modalIndhold = "Du er ved at slette vigtige data. Denne handling kan ikke fortrydes. Er du sikker på, at du vil fortsætte?";
+        modalHandling = "Slet alligevel";
+        visModal = true;
+    }
+    
+    private void LukModal()
+    {
+        visModal = false;
+    }
+    
+    private void ModalHandling()
+    {
+        // Her kan du tilføje specifikke handlinger for de forskellige modaler
+        // F.eks. bekræfte en sletning, navigere til en ny side, osv.
+        LukModal();
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/12");
+    }
+} 

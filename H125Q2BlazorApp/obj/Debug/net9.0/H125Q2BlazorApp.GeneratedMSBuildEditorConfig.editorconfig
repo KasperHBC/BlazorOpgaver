@@ -1,0 +1,317 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = H125Q2BlazorApp
+build_property.RootNamespace = H125Q2BlazorApp
+build_property.ProjectDir = C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/LikeCounter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMaWtlQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/ImplementationEmpty.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbXBsZW1lbnRhdGlvbkVtcHR5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/FavoriteNavCounter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcRmF2b3JpdGVOYXZDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/ProductDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcUHJvZHVjdERldGFpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/SimpleCalc.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcU2ltcGxlQ2FsYy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task10Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazEwU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task11Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazExU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task12Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazEyU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task13Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazEzU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task14Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE0U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task15Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE1U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task16Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE2U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task17Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE3U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task18Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE4U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task19Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazE5U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task1Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazFTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task20Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazIwU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task21Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazIxU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task22Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazIyU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task23Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazIzU29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task24Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazI0U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task25Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazI1U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task26Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazI2U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task27Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazI3U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task28Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazI4U29sdXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task2Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazJTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task3Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazNTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task4Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazRTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task5Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazVTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task6Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazZTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task7Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazdTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task8Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazhTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/Task9Solution.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVGFzazlTb2x1dGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Solutions/TællerVisning.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTb2x1dGlvbnNcVMOmbGxlclZpc25pbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task10Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxMFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task11Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxMVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task12Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxMlRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task13Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxM1RlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task14Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxNFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task15Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxNVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task16Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxNlRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task17Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxN1RlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task18Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxOFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task19Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxOVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task1Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2sxVGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task20Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syMFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task21Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syMVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task22Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syMlRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task23Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syM1RlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task24Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syNFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task25Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syNVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task26Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syNlRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task27Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syN1RlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task28Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syOFRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task2Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2syVGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task3Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2szVGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task4Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s0VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task5Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s1VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task6Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s2VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task7Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s3VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task8Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s4VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/StudentTemplates/Task9Template.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50VGVtcGxhdGVzXFRhc2s5VGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Tasks/TaskDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYXNrc1xUYXNrRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Tasks/TasksOverview.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYXNrc1xUYXNrc092ZXJ2aWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Shared/Card.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-s3mv4sgknn
+
+[C:/Users/kasc/Documents/GitHub/H125Q2/H125Q2BlazorApp/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-tdq2ctygup

@@ -1,0 +1,118 @@
+@page "/student/21"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Skabelon: Password Validator</PageTitle>
+
+<h1>Skabelon: Password Validator</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent til validering af passwords. Brugeren skal kunne indtaste et password og få direkte feedback om, hvor stærkt det er. Komponenten skal vise en styrkeindikator (fx en farveskala eller procent) og en liste over krav som passwords skal opfylde (med markering af hvilke, der er opfyldt). De klassiske krav kunne være: mindst 8 tegn, mindst ét stort bogstav, mindst ét lille bogstav, mindst ét tal, og mindst ét specialtegn.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="password-input" class="form-label">Indtast et password:</label>
+            <div class="input-group">
+                <input id="password-input" 
+                       type="password" 
+                       class="form-control" 
+                       @bind="password" 
+                       @bind:event="oninput" 
+                       placeholder="Indtast dit password" />
+                <!-- Tip: Overvej at tilføje en knap til at vise/skjule password -->
+            </div>
+        </div>
+        
+        <!-- Styrkeindikator -->
+        <div class="mb-4">
+            <h5>Password styrke: <span>?</span></h5>
+            <div class="progress" style="height: 20px;">
+                <div class="progress-bar" 
+                     role="progressbar" 
+                     style="width: 0%;" 
+                     aria-valuenow="0" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100">
+                    0%
+                </div>
+            </div>
+        </div>
+        
+        <!-- Krav liste -->
+        <div class="mb-4">
+            <h5>Password krav:</h5>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <!-- Vis et ikon baseret på om kravet er opfyldt eller ej -->
+                    Mindst 8 tegn
+                </li>
+                <li class="list-group-item">
+                    Mindst ét stort bogstav (A-Z)
+                </li>
+                <li class="list-group-item">
+                    Mindst ét lille bogstav (a-z)
+                </li>
+                <li class="list-group-item">
+                    Mindst ét tal (0-9)
+                </li>
+                <li class="list-group-item">
+                    Mindst ét specialtegn (f.eks. @@, #, $, *, !)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Vejledning</h5>
+    </div>
+    <div class="card-body">
+        <p>Her er en kort guide til implementering af password validatoren:</p>
+        
+        <h6>1. Opsæt model og variabler</h6>
+        <p>Du skal bruge følgende variabler:</p>
+        <ul>
+            <li>En streng-variabel til at gemme det indtastede password</li>
+            <li>Boolske variabler eller properties der tjekker forskellige krav</li>
+            <li>Variabler til at beregne og vise styrken af passwordet</li>
+        </ul>
+
+        <h6>2. Implementer validerings-logikken</h6>
+        <p>Du skal implementere forskellige valideringer, f.eks.:</p>
+        <ul>
+            <li>Tjek om passwordet har mindst 8 tegn</li>
+            <li>Tjek om det indeholder mindst ét stort bogstav</li>
+            <li>Tjek om det indeholder mindst ét lille bogstav</li>
+            <li>Tjek om det indeholder mindst ét tal</li>
+            <li>Tjek om det indeholder mindst ét specialtegn</li>
+        </ul>
+
+        <h6>3. UI-opdatering</h6>
+        <p>Opdater UI baseret på valideringsresultaterne:</p>
+        <ul>
+            <li>Vis en styrkeindikator (progressbar) baseret på antal opfyldte krav</li>
+            <li>Marker de opfyldte krav med grøn farve og et check-ikon</li>
+            <li>Marker de ikke-opfyldte krav med rød farve og et kryds-ikon</li>
+        </ul>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string password = "";
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/21");
+    }
+} 

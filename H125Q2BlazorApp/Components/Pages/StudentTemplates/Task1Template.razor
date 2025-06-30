@@ -1,0 +1,65 @@
+@page "/student/1"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 1: Velkomsthilsen.
+    
+    Du skal lave en Blazor-komponent, der viser en personlig velkomsthilsen.
+    Komponenten skal have en inputboks til navn og en knap.
+    Når brugeren indtaster sit navn og klikker på knappen, skal der vises en hilsen.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 1: Velkomsthilsen</PageTitle>
+
+<h1>Opgave 1: Velkomsthilsen</h1>
+
+@{
+    var task = TaskService.GetTaskById(1);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. en input, en knap og et element til at vise hilsenen.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string navn = "";
+    // private string hilsen = "";
+    
+    // Tilføj metoder her, f.eks.:
+    // private void VisHilsen()
+    // {
+    //     hilsen = $"Hej, {navn} og velkommen til Blazor!";
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/1");
+    }
+} 

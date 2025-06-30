@@ -1,0 +1,28 @@
+@using H125Q2BlazorApp.Services
+@using Task = System.Threading.Tasks.Task
+@implements IAsyncDisposable
+@inject FavoriteService FavoriteService
+
+<span class="badge bg-danger position-relative rounded-pill @(FavoriteService.FavoriteCount > 0 ? "d-inline-flex" : "d-none")">
+    <i class="bi bi-heart-fill me-1"></i>
+    <span>@FavoriteService.FavoriteCount</span>
+</span>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // Indlæs favoritter fra localStorage
+        await FavoriteService.LoadFavoritesAsync();
+        
+        // Abonnér på ændringer i favoritter
+        FavoriteService.OnFavoritesChanged += StateHasChanged;
+    }
+    
+    public ValueTask DisposeAsync()
+    {
+        // Fjern event handler når komponenten destrueres
+        FavoriteService.OnFavoritesChanged -= StateHasChanged;
+        
+        return ValueTask.CompletedTask;
+    }
+} 

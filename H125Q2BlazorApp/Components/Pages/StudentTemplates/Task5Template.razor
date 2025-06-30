@@ -1,0 +1,81 @@
+@page "/student/5"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 5: Tilføj & Fjern fra Liste.
+    
+    Du skal lave en komponent, hvor brugeren kan tilføje elementer til en liste
+    og fjerne dem igen. For eksempel en simpel "to-do" liste med et tekstfelt
+    og en "Tilføj" knap. Hvert listeelement skal have en "Fjern" knap.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 5: Tilføj & Fjern fra Liste</PageTitle>
+
+<h1>Opgave 5: Tilføj & Fjern fra Liste</h1>
+
+@{
+    var task = TaskService.GetTaskById(5);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 5 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. et inputfelt, en "Tilføj" knap,
+    og et område der viser listen af elementer med "Fjern" knapper.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string nytElement = "";
+    // private List<string> elementer = new List<string>();
+    
+    // Tilføj metoder her, f.eks.:
+    // private void TilføjElement()
+    // {
+    //     if (!string.IsNullOrWhiteSpace(nytElement))
+    //     {
+    //         elementer.Add(nytElement);
+    //         nytElement = ""; // Nulstil input-feltet
+    //     }
+    // }
+    
+    // private void FjernElement(string element)
+    // {
+    //     elementer.Remove(element);
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/5");
+    }
+} 

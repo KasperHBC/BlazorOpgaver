@@ -1,0 +1,97 @@
+@page "/student/9"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Skabelon: Gæt et Tal</PageTitle>
+
+<h1>Skabelon: Gæt et Tal</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav et simpelt "Gæt et tal" spil. Applikationen skal vælge et tilfældigt heltal mellem 1 og 100 (uden at vise det). Brugeren skal så indtaste gæt i et tekstfelt. Når brugeren gætter, viser app'en om gættet er for højt, for lavt, eller korrekt. Hvis det er korrekt, kan du give en succes-besked og mulighed for at starte et nyt spil.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-4">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <label for="guess-input" class="form-label">Gæt et tal mellem 1 og 100:</label>
+                    <div class="input-group">
+                        <input id="guess-input" 
+                               type="number" 
+                               class="form-control" 
+                               placeholder="Indtast dit gæt"
+                               min="1"
+                               max="100" />
+                        <button class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i> Gæt
+                        </button>
+                    </div>
+                    <div class="form-text">
+                        Antal forsøg: 0
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <button class="btn btn-success w-100">
+                        <i class="bi bi-arrow-repeat me-1"></i> Start nyt spil
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feedback område -->
+        <div class="alert alert-primary mt-4">
+            <h4><i class="bi bi-info-circle me-2"></i>Start et nyt spil og begynd at gætte!</h4>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Vejledning</h5>
+    </div>
+    <div class="card-body">
+        <p>Her er en kort guide til implementering af dit "Gæt et tal" spil:</p>
+        
+        <h6>1. Opsæt model og variabler</h6>
+        <p>Du skal bruge følgende variabler:</p>
+        <ul>
+            <li>En variabel til at gemme det hemmelige tal</li>
+            <li>En variabel til brugerens gæt</li>
+            <li>En tæller for antal forsøg</li>
+            <li>Variabler til at styre feedback og UI-tilstande</li>
+        </ul>
+
+        <h6>2. Implementer spil-logikken</h6>
+        <p>Du skal implementere følgende funktioner:</p>
+        <ul>
+            <li>En funktion til at generere et nyt tilfældigt tal</li>
+            <li>En funktion til at håndtere brugerens gæt og sammenligne med det hemmelige tal</li>
+            <li>Logik til at vise den rette feedback baseret på gættet</li>
+        </ul>
+
+        <h6>3. UI-opdatering</h6>
+        <p>Tilføj data binding mellem UI og variabler:</p>
+        <ul>
+            <li>Bind input-feltet til din gæt-variabel</li>
+            <li>Tilføj event handlers til knapperne</li>
+            <li>Vis feedback baseret på gættets resultat</li>
+        </ul>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/9");
+    }
+} 

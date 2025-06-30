@@ -1,0 +1,120 @@
+@page "/task/{Id:int}"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>@(Task?.Title ?? "Opgavedetaljer")</PageTitle>
+
+@if (Task == null)
+{
+    <div class="alert alert-danger">
+        Opgaven blev ikke fundet!
+    </div>
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til oversigten</button>
+}
+else
+{
+    <div class="mb-3">
+        <span class="badge @GetDifficultyBadgeClass(Task.Difficulty)">
+            @GetDifficultyText(Task.Difficulty)
+        </span>
+        <h1>@Task.Title</h1>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Beskrivelse</h5>
+                </div>
+                <div class="card-body">
+                    <p>@Task.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Hvad du lærer</h5>
+                </div>
+                <div class="card-body">
+                    <p>@Task.WhatYouLearn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Hints</h5>
+                </div>
+                <div class="card-body">
+                    <p>@Task.Hints</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4 mt-4">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-primary" @onclick="GoBack">Tilbage til oversigten</button>
+                
+                <div>
+                    @if (ShowTeacherVersion)
+                    {
+                        <a href="/solutions/@Task.Id" class="btn btn-success me-2">Vis færdig løsning (lærerversion)</a>
+                    }
+                    <a href="/student/@Task.Id" class="btn btn-info">Start egen implementering</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private H125Q2BlazorApp.Models.Task? Task;
+    
+    // Denne kan sættes til false for at fjerne adgangen til lærerløsninger
+    private bool ShowTeacherVersion = true;
+
+    protected override void OnInitialized()
+    {
+        Task = TaskService.GetTaskById(Id);
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/tasks");
+    }
+
+    private string GetDifficultyBadgeClass(H125Q2BlazorApp.Models.TaskDifficulty difficulty)
+    {
+        return difficulty switch
+        {
+            H125Q2BlazorApp.Models.TaskDifficulty.Easy => "bg-success",
+            H125Q2BlazorApp.Models.TaskDifficulty.Medium => "bg-warning",
+            H125Q2BlazorApp.Models.TaskDifficulty.Hard => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+
+    private string GetDifficultyText(H125Q2BlazorApp.Models.TaskDifficulty difficulty)
+    {
+        return difficulty switch
+        {
+            H125Q2BlazorApp.Models.TaskDifficulty.Easy => "Let",
+            H125Q2BlazorApp.Models.TaskDifficulty.Medium => "Mellem",
+            H125Q2BlazorApp.Models.TaskDifficulty.Hard => "Svær",
+            _ => "Ukendt"
+        };
+    }
+} 

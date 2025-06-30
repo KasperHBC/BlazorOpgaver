@@ -1,0 +1,24 @@
+@inject H125Q2BlazorApp.Services.AppState AppState
+@implements IDisposable
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Tæller Visning</h5>
+    </div>
+    <div class="card-body">
+        <p>Samme tæller vises her: @AppState.Tæller</p>
+        <button class="btn btn-info" @onclick="StateHasChanged">Opdater visning</button>
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+} 

@@ -1,0 +1,53 @@
+@using H125Q2BlazorApp.Components.Shared
+@page "/solutions/19"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Kort Komponent</PageTitle>
+
+<h1>Implementering: Kort Komponent</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave viser hvordan man laver en genanvendelig kort-komponent i Blazor.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <Card 
+            Titel="Blazor Bogen" 
+            Beskrivelse="En spændende bog om Blazor framework og hvordan man kan bygge moderne webapplikationer med C#." 
+            BilledeUrl="https://via.placeholder.com/150">
+            <button class="btn btn-sm btn-primary">Læs mere</button>
+        </Card>
+    </div>
+    <div class="col-md-4 mb-4">
+        <Card 
+            Titel="Følg mig på SoMe" 
+            Beskrivelse="Find mig på sociale medier og få de nyeste opdateringer om web development.">
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary">Twitter</button>
+                <button class="btn btn-sm btn-outline-info">LinkedIn</button>
+            </div>
+        </Card>
+    </div>
+    <div class="col-md-4 mb-4">
+        <Card 
+            Titel="Profilkort" 
+            Beskrivelse="Anna Hansen er en erfaren udvikler med kompetencer inden for .NET, Blazor og moderne webudvikling." 
+            BilledeUrl="https://randomuser.me/api/portraits/women/44.jpg">
+            <button class="btn btn-sm btn-success">Kontakt</button>
+        </Card>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/19");
+    }
+} 

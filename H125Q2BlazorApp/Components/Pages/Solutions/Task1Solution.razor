@@ -1,0 +1,67 @@
+@page "/solutions/1"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+
+<PageTitle>Implementering: Velkomsthilsen</PageTitle>
+
+<h1>Implementering: Velkomsthilsen</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en Blazor-komponent, der viser en personlig velkomsthilsen. Komponenten skal have en inputboks til navn og en knap. Når man indtaster sit navn og klikker på knappen, skal der vises en hilsen.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <p>Debug: Aktuelt navn = "@navn", Besked vist: @beskedVist</p>
+        
+        <div>
+            <label>Dit navn:</label>
+            <input value="@navn" @onchange="@((e) => { navn = e.Value?.ToString() ?? string.Empty; })" />
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-primary" @onclick="VisHilsen">Vis hilsen</button>
+            <button class="btn btn-secondary" @onclick="@(() => beskedVist = !beskedVist)">Toggle hilsen</button>
+        </div>
+
+        <div class="mt-3">
+            @if (beskedVist)
+            {
+                <div class="alert alert-success">
+                    <p>Hej, @navn og velkommen til Blazor!</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string navn = "Test Navn";
+    private bool beskedVist = false;
+
+    protected override void OnInitialized()
+    {
+        // Tester med standardværdier
+        Console.WriteLine("OnInitialized: Komponent initialiseret");
+    }
+
+    private void VisHilsen()
+    {
+        beskedVist = true;
+        Console.WriteLine($"VisHilsen: navn={navn}, beskedVist={beskedVist}");
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/1");
+    }
+} 

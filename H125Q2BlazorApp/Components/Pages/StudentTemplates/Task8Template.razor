@@ -1,0 +1,73 @@
+@page "/student/8"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 8: Farvemixer (RGB-slider).
+    
+    Du skal lave en komponent med tre slidere (range inputs) for rød, grøn og blå.
+    Når brugeren justerer sliderne, skal farven på et felt ændres tilsvarende i realtid.
+    Du skal også vise de numeriske RGB-værdier.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 8: Farvemixer (RGB-slider)</PageTitle>
+
+<h1>Opgave 8: Farvemixer (RGB-slider)</h1>
+
+@{
+    var task = TaskService.GetTaskById(8);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 8 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. tre slidere (range inputs) for R, G og B,
+    et felt der viser den valgte farve, og numeriske værdier.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private int r = 0;
+    // private int g = 0;
+    // private int b = 0;
+    
+    // Du kan lave en beregnet property til at generere farvekode-stringen:
+    // private string FarveKode => $"rgb({r},{g},{b})";
+    
+    // Alternativt kan du have hex-kode:
+    // private string HexKode => $"#{r:X2}{g:X2}{b:X2}";
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/8");
+    }
+} 

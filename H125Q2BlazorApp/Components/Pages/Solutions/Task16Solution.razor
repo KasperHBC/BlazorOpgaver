@@ -1,0 +1,94 @@
+@page "/solutions/16"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Tilfældig Citat Generator</PageTitle>
+
+<h1>Implementering: Tilfældig Citat Generator</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent, der viser et tilfældigt citat fra en liste af inspirerende citater. Hver gang brugeren klikker på en "Nyt Citat" knap, skal der vises et nyt tilfældigt citat. Citatet skal vises med forfatter og evt. et relevant ikon eller emoji. Du kan også tilføje en "Del på Twitter" knap, der åbner Twitter med det aktuelle citat.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <i class="bi bi-quote display-1 text-primary mb-4"></i>
+                        <blockquote class="blockquote mb-4">
+                            <p class="display-6">@valgtCitat.Tekst</p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="@valgtCitat.Forfatter">@valgtCitat.Forfatter</cite>
+                            </footer>
+                        </blockquote>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="btn btn-primary" @onclick="VælgNytCitat">
+                                <i class="bi bi-shuffle me-2"></i>Nyt Citat
+                            </button>
+                            <a href="@GetTwitterUrl()" target="_blank" class="btn btn-info">
+                                <i class="bi bi-twitter me-2"></i>Del på Twitter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private class Citat
+    {
+        public string Tekst { get; set; } = "";
+        public string Forfatter { get; set; } = "";
+    }
+
+    private List<Citat> citater = new()
+    {
+        new Citat { Tekst = "Vær dig selv, alle andre er allerede taget.", Forfatter = "Oscar Wilde" },
+        new Citat { Tekst = "Livets mening er at give liv mening.", Forfatter = "Ken Hudgins" },
+        new Citat { Tekst = "Succes er ikke endestationen, det er rejsen.", Forfatter = "Arthur Ashe" },
+        new Citat { Tekst = "Det bedste tidspunkt at plante et træ var for 20 år siden. Det næstbedste er nu.", Forfatter = "Kinesisk ordsprog" },
+        new Citat { Tekst = "Jeg har ikke fejlet. Jeg har bare fundet 10.000 måder, der ikke virker.", Forfatter = "Thomas Edison" },
+        new Citat { Tekst = "Det er ikke hvor mange gange du falder, men hvor mange gange du rejser dig.", Forfatter = "Nelson Mandela" },
+        new Citat { Tekst = "Den eneste måde at gøre fantastisk arbejde på, er at elske det du laver.", Forfatter = "Steve Jobs" },
+        new Citat { Tekst = "Alt er muligt, når du har den rigtige attitude.", Forfatter = "Charles R. Swindoll" },
+        new Citat { Tekst = "Din tid er begrænset, så spild den ikke på at leve andres liv.", Forfatter = "Steve Jobs" },
+        new Citat { Tekst = "Det er aldrig for sent at blive det, du kunne have været.", Forfatter = "George Eliot" }
+    };
+
+    private Citat valgtCitat = new();
+    private Random random = new Random();
+
+    protected override void OnInitialized()
+    {
+        VælgNytCitat();
+    }
+
+    private void VælgNytCitat()
+    {
+        int index = random.Next(citater.Count);
+        valgtCitat = citater[index];
+    }
+
+    private string GetTwitterUrl()
+    {
+        string tweetText = $"\"{valgtCitat.Tekst}\" - {valgtCitat.Forfatter}";
+        return $"https://twitter.com/intent/tweet?text={Uri.EscapeDataString(tweetText)}";
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/16");
+    }
+} 

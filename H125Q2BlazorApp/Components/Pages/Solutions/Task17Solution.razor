@@ -1,0 +1,56 @@
+@page "/solutions/17"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@inject H125Q2BlazorApp.Services.AppState AppState
+@implements IDisposable
+
+<PageTitle>Implementering: Global Tilstand</PageTitle>
+
+<h1>Implementering: Global Tilstand</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer hvordan man kan dele tilstand mellem komponenter ved hjælp af en service.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Tæller Kontrol</h5>
+            </div>
+            <div class="card-body">
+                <p>Nuværende værdi: @AppState.Tæller</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" @onclick="AppState.Inkrementer">+</button>
+                    <button class="btn btn-secondary" @onclick="AppState.Dekrementer">-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <TællerVisning />
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/17");
+    }
+} 

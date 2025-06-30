@@ -1,0 +1,53 @@
+@page "/student/25"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 25: Opret-annonce formular</PageTitle>
+
+<h1>Opgave 25: Opret-annonce formular</h1>
+
+@{
+    var task = TaskService.GetTaskById(25);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Opdatere din Product model med DataAnnotation attributter og et Category felt</li>
+            <li>Oprette en ProductService, der gemmer produkter i en Liste</li>
+            <li>Registrere ProductService som Singleton i Program.cs</li>
+            <li>Lave en formular med EditForm, der binder til en Product model</li>
+            <li>Bruge InputText, InputNumber, InputTextArea og InputSelect komponenter til formularfelterne</li>
+            <li>Tilføje validering med DataAnnotationsValidator</li>
+            <li>Vise valideringsfejl med ValidationMessage eller ValidationSummary</li>
+        </ol>
+        
+        <p>Husk at billedet skal kunne uploades og vises, du kan genbruge logikken fra Opgave 24.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/25");
+    }
+} 

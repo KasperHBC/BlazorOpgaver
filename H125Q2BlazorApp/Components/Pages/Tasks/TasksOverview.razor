@@ -1,0 +1,65 @@
+@page "/tasks"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+
+<PageTitle>Miniopgaver - Blazor</PageTitle>
+
+<h1>Miniopgaver i Blazor</h1>
+
+<p>Her finder du en oversigt over alle miniopgaver i Blazor. Klik på en opgave for at se detaljer og implementering.</p>
+
+<div class="alert alert-info">
+    <p>Antal opgaver: @Tasks.Count</p>
+    <p>Opgave IDs: @string.Join(", ", Tasks.Select(t => t.Id).OrderBy(id => id))</p>
+</div>
+
+<div class="card-deck row">
+    @foreach (var task in Tasks.OrderBy(t => t.Id))
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="badge @GetDifficultyBadgeClass(task.Difficulty)">
+                        @GetDifficultyText(task.Difficulty)
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@task.Title (ID: @task.Id)</h5>
+                    <p class="card-text">@(task.Description.Length > 100 ? task.Description.Substring(0, 100) + "..." : task.Description)</p>
+                    <a href="/task/@task.Id" class="btn btn-primary">Se detaljer</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<H125Q2BlazorApp.Models.Task> Tasks = new();
+
+    protected override void OnInitialized()
+    {
+        Tasks = TaskService.GetAllTasks();
+    }
+
+    private string GetDifficultyBadgeClass(H125Q2BlazorApp.Models.TaskDifficulty difficulty)
+    {
+        return difficulty switch
+        {
+            H125Q2BlazorApp.Models.TaskDifficulty.Easy => "bg-success",
+            H125Q2BlazorApp.Models.TaskDifficulty.Medium => "bg-warning",
+            H125Q2BlazorApp.Models.TaskDifficulty.Hard => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+
+    private string GetDifficultyText(H125Q2BlazorApp.Models.TaskDifficulty difficulty)
+    {
+        return difficulty switch
+        {
+            H125Q2BlazorApp.Models.TaskDifficulty.Easy => "Let",
+            H125Q2BlazorApp.Models.TaskDifficulty.Medium => "Mellem",
+            H125Q2BlazorApp.Models.TaskDifficulty.Hard => "Svær",
+            _ => "Ukendt"
+        };
+    }
+} 

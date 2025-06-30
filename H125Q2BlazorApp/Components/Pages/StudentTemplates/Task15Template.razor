@@ -1,0 +1,66 @@
+@page "/student/15"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Skabelon: Søgefilter for Liste</PageTitle>
+
+<h1>Skabelon: Søgefilter for Liste</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent, der viser en liste af elementer (fx en liste af produktnavne, byer, eller lignende) og giver brugeren mulighed for at filtrere listen via et søgefelt. Når brugeren skriver i søgefeltet, skal listen automatisk (løbende) filtrere de elementer, der indeholder den indtastede tekst. Søgningen kan være case-insensitive for bedre brugeroplevelse.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <h4>Demonstration af søgefilter</h4>
+        
+        <div class="alert alert-secondary">
+            <p>
+                <i class="bi bi-info-circle me-2"></i>
+                Her skal du implementere en liste med søgefilter. Du kan vælge hvilken type elementer du vil vise i listen.
+            </p>
+        </div>
+        
+        <!-- Din implementering her -->
+
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Vejledning</h5>
+    </div>
+    <div class="card-body">
+        <p>Her er en kort guide til implementering af søgefilter:</p>
+        
+        <h6>1. Opret en liste</h6>
+        <p>Start med at oprette en liste af elementer (fx byer, produkter, osv.)</p>
+
+        <h6>2. Tilføj søgefelt</h6>
+        <p>Implementer et input-felt til søgning med binding til en variabel</p>
+
+        <h6>3. Implementer filtrering</h6>
+        <p>Opret en computed property der filtrerer listen baseret på søgeteksten</p>
+
+        <h6>4. Vis resultaterne</h6>
+        <p>Brug en foreach-løkke til at vise de filtrerede resultater</p>
+
+        <h6>5. Tilføj feedback (valgfrit)</h6>
+        <p>Vis en besked når ingen resultater findes</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/15");
+    }
+} 

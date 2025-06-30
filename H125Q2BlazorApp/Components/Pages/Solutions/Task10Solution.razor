@@ -1,0 +1,61 @@
+@page "/solutions/10"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Like Counter Komponent</PageTitle>
+
+<h1>Implementering: Like Counter Komponent</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en genanvendelig "Like-knap" komponent, der tæller hvor mange gange den er klikket (ligesom et simpelt like-system). Komponenten består af en knap med en ikon eller tekst (fx 👍) og et tal, der viser antallet af likes. Hver gang brugeren klikker, skal tælleren stige med 1. Implementér to af denne komponent på samme side for at demonstrere, at de tæller uafhængigt.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <h4>Demonstration af Like Counter komponenten</h4>
+        <p>Her vises LikeCounter komponenten anvendt på to forskellige steder - bemærk at de tæller uafhængigt.</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">Billede 1</div>
+                    <div class="card-body text-center">
+                        <img src="https://via.placeholder.com/200" alt="Placeholder billede" class="img-fluid mb-3" />
+                        
+                        <div class="mt-2">
+                            <LikeCounter Icon="👍 " />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">Billede 2</div>
+                    <div class="card-body text-center">
+                        <img src="https://via.placeholder.com/200" alt="Placeholder billede" class="img-fluid mb-3" />
+                        
+                        <div class="mt-2">
+                            <LikeCounter Icon="❤️ " ButtonClass="btn-outline-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/10");
+    }
+} 

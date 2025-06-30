@@ -1,0 +1,71 @@
+@page "/student/7"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 7: Live Teksttæller.
+    
+    Du skal lave en komponent med en tekstarea, hvor brugeren kan skrive tekst,
+    og under tekstfeltet skal der i realtid vises hvor mange tegn og ord
+    der er skrevet, mens brugeren taster.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 7: Live Teksttæller</PageTitle>
+
+<h1>Opgave 7: Live Teksttæller</h1>
+
+@{
+    var task = TaskService.GetTaskById(7);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 7 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. en textarea hvor brugeren kan skrive tekst,
+    og et område der viser antal tegn og ord i realtid.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string tekst = "";
+    
+    // Beregn antal tegn og ord via properties (alternativt kan du beregne det direkte i markup)
+    // private int AntalTegn => tekst.Length;
+    // private int AntalOrd => string.IsNullOrWhiteSpace(tekst) 
+    //     ? 0 
+    //     : tekst.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/7");
+    }
+} 

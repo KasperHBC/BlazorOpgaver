@@ -1,0 +1,66 @@
+@page "/student/10"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Skabelon: Like Counter Komponent</PageTitle>
+
+<h1>Skabelon: Like Counter Komponent</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en genanvendelig "Like-knap" komponent, der tæller hvor mange gange den er klikket (ligesom et simpelt like-system). Komponenten består af en knap med en ikon eller tekst (fx 👍) og et tal, der viser antallet af likes. Hver gang brugeren klikker, skal tælleren stige med 1. Implementér to af denne komponent på samme side for at demonstrere, at de tæller uafhængigt (for at illustrere komponent-genbrug).</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <h4>Demonstration af Like Counter komponenten</h4>
+        
+        <div class="alert alert-secondary">
+            <p>
+                <i class="bi bi-info-circle me-2"></i>
+                Her skal du implementere en genanvendelig Like Counter komponent og vise den anvendt to forskellige steder.
+            </p>
+        </div>
+        
+        <!-- Din implementering her -->
+
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Vejledning</h5>
+    </div>
+    <div class="card-body">
+        <p>Her er en kort guide til implementering af din Like Counter komponent:</p>
+        
+        <h6>1. Opret en ny komponent</h6>
+        <p>Opret en ny fil i Components-mappen kaldet LikeCounter.razor</p>
+
+        <h6>2. Implementer knappen med tæller</h6>
+        <p>Din komponent skal have en knap der viser et ikon og antal likes</p>
+
+        <h6>3. Tilføj logikken</h6>
+        <p>Implementer funktionaliteten til at tælle likes, når knappen klikkes</p>
+
+        <h6>4. Brug komponenten flere steder</h6>
+        <p>Implementer komponenten flere steder på samme side for at vise genbrugelighed</p>
+
+        <h6>5. Udvid med parametre (valgfrit)</h6>
+        <p>Gør komponenten mere fleksibel ved at tilføje parametre for ikon, styling, osv.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/10");
+    }
+} 

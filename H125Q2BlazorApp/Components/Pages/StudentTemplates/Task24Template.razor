@@ -1,0 +1,85 @@
+@page "/student/24"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 24: Upload billede til wwwroot</PageTitle>
+
+<h1>Opgave 24: Upload billede til wwwroot</h1>
+
+@{
+    var task = TaskService.GetTaskById(24);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Oprette en formular med InputFile komponent</li>
+            <li>Håndtere OnChange event for at få adgang til de uploadede filer</li>
+            <li>Gemme den valgte fil i wwwroot/uploads-mappen</li>
+            <li>Generere et unikt filnavn med Guid.NewGuid() for at undgå fil-konflikter</li>
+            <li>Vise et preview af det uploadede billede</li>
+        </ol>
+        
+        <p>Tip: Du har brug for at bruge System.IO namespace og håndtere stream-overførslen af filen.</p>
+        
+        <h5 class="mt-4">Eksempel på kodestruktur:</h5>
+        <pre><code>
+// I toppen af filen
+@using System.IO
+@inject IWebHostEnvironment Environment
+
+// I din kode
+private async Task UploadFile(InputFileChangeEventArgs e)
+{
+    // Hent fil fra event
+    var file = e.File;
+    
+    // Generer unikt filnavn
+    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.Name)}";
+    
+    // Bestem upload stien
+    var uploadPath = Path.Combine(Environment.WebRootPath, "uploads");
+    
+    // Sørg for at mappen eksisterer
+    Directory.CreateDirectory(uploadPath);
+    
+    // Gem filen
+    var filePath = Path.Combine(uploadPath, fileName);
+    
+    using (var stream = File.Create(filePath))
+    {
+        await file.OpenReadStream().CopyToAsync(stream);
+    }
+    
+    // Gem sti til visning
+    uploadedImagePath = $"/uploads/{fileName}";
+}
+        </code></pre>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/24");
+    }
+} 

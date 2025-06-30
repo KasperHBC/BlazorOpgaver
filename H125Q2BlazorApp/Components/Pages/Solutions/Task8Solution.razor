@@ -1,0 +1,161 @@
+@page "/solutions/8"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Farvemixer (RGB-slider)</PageTitle>
+
+<h1>Implementering: Farvemixer (RGB-slider)</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en farvemixer, hvor brugeren med tre sliders kan justere værdierne for Rød, Grøn og Blå (RGB) og dermed ændre farven på et visningsfelt. Komponenten skal have tre <code>&lt;input type="range"&gt;</code> (slidere) for R, G og B (værdier 0-255). Når brugeren flytter på en slider, skal baggrunden (eller et felt) ændre farve i realtid til den tilsvarende RGB-farve. Vis også de aktuelle RGB-værdier numerisk.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <!-- Farveviser -->
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="card border">
+                    <div style="height: 200px; background-color:@RgbKode;" class="d-flex justify-content-center align-items-center">
+                        <div class="text-center p-3 @TextColor">
+                            <h2>Farvevisning</h2>
+                            <p>RGB: (@r, @g, @b)</p>
+                            <p>HEX: @HexKode</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RGB slidere -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <!-- Rød slider -->
+                <div class="mb-3">
+                    <label for="red-slider" class="form-label d-flex justify-content-between">
+                        <span>Rød (R)</span>
+                        <span class="badge bg-danger">@r</span>
+                    </label>
+                    <input id="red-slider" 
+                           type="range" 
+                           class="form-range" 
+                           min="0" 
+                           max="255" 
+                           @bind-value="r" 
+                           @bind-value:event="oninput" />
+                </div>
+                
+                <!-- Grøn slider -->
+                <div class="mb-3">
+                    <label for="green-slider" class="form-label d-flex justify-content-between">
+                        <span>Grøn (G)</span>
+                        <span class="badge bg-success">@g</span>
+                    </label>
+                    <input id="green-slider" 
+                           type="range" 
+                           class="form-range" 
+                           min="0" 
+                           max="255" 
+                           @bind-value="g" 
+                           @bind-value:event="oninput" />
+                </div>
+                
+                <!-- Blå slider -->
+                <div class="mb-3">
+                    <label for="blue-slider" class="form-label d-flex justify-content-between">
+                        <span>Blå (B)</span>
+                        <span class="badge bg-primary">@b</span>
+                    </label>
+                    <input id="blue-slider" 
+                           type="range" 
+                           class="form-range" 
+                           min="0" 
+                           max="255" 
+                           @bind-value="b" 
+                           @bind-value:event="oninput" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forudbestemte farver -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <h5>Forudbestemte farver:</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-sm" style="background-color: #FF0000; color: white;" @onclick="() => SætFarve(255, 0, 0)">Rød</button>
+                    <button class="btn btn-sm" style="background-color: #00FF00; color: black;" @onclick="() => SætFarve(0, 255, 0)">Grøn</button>
+                    <button class="btn btn-sm" style="background-color: #0000FF; color: white;" @onclick="() => SætFarve(0, 0, 255)">Blå</button>
+                    <button class="btn btn-sm" style="background-color: #FFFF00; color: black;" @onclick="() => SætFarve(255, 255, 0)">Gul</button>
+                    <button class="btn btn-sm" style="background-color: #FF00FF; color: white;" @onclick="() => SætFarve(255, 0, 255)">Magenta</button>
+                    <button class="btn btn-sm" style="background-color: #00FFFF; color: black;" @onclick="() => SætFarve(0, 255, 255)">Cyan</button>
+                    <button class="btn btn-sm" style="background-color: #FFA500; color: black;" @onclick="() => SætFarve(255, 165, 0)">Orange</button>
+                    <button class="btn btn-sm" style="background-color: #800080; color: white;" @onclick="() => SætFarve(128, 0, 128)">Lilla</button>
+                    <button class="btn btn-sm" style="background-color: #000000; color: white;" @onclick="() => SætFarve(0, 0, 0)">Sort</button>
+                    <button class="btn btn-sm" style="background-color: #FFFFFF; color: black; border: 1px solid #ccc;" @onclick="() => SætFarve(255, 255, 255)">Hvid</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tilfældig farve knap -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <button class="btn btn-outline-primary" @onclick="GenererTilfældigFarve">
+                    <i class="bi bi-shuffle me-2"></i> Tilfældig farve
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private int r = 50;
+    private int g = 100;
+    private int b = 150;
+    private Random random = new Random();
+    
+    // Beregnede properties
+    private string RgbKode => $"rgb({r},{g},{b})";
+    private string HexKode => $"#{r:X2}{g:X2}{b:X2}";
+    
+    // Automatisk beregn om tekst skal være sort eller hvid baseret på baggrundsfarvens lysstyrke
+    private string TextColor
+    {
+        get
+        {
+            // Beregn luminans (lysstyrke) baseret på RGB-værdier
+            // Formel: 0.299*R + 0.587*G + 0.114*B (standard vægtet formel)
+            double luminans = 0.299 * r + 0.587 * g + 0.114 * b;
+            
+            // Hvis luminans er over 128 (halvvejs) bruges sort tekst, ellers hvid
+            return luminans > 128 ? "text-dark" : "text-white";
+        }
+    }
+    
+    private void SætFarve(int rød, int grøn, int blå)
+    {
+        r = rød;
+        g = grøn;
+        b = blå;
+    }
+    
+    private void GenererTilfældigFarve()
+    {
+        // Generer tilfældige RGB-værdier mellem 0 og 255
+        r = random.Next(256);
+        g = random.Next(256);
+        b = random.Next(256);
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/8");
+    }
+} 

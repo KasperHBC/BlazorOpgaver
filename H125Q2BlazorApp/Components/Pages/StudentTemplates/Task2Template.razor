@@ -1,0 +1,70 @@
+@page "/student/2"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 2: Komplimentknap.
+    
+    Du skal lave en knap, der giver brugeren et tilfældigt kompliment, hver gang den klikkes.
+    Lav en liste over komplimenter og vis et nyt tilfældigt kompliment, når knappen klikkes.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 2: Komplimentknap</PageTitle>
+
+<h1>Opgave 2: Komplimentknap</h1>
+
+@{
+    var task = TaskService.GetTaskById(2);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. en knap og et element til at vise komplimentet.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private string kompliment = "";
+    // private List<string> komplimenter = new List<string> {
+    //    "Du skriver kode som en mester!",
+    //    "Din debugging-evne er superhelte-værdig!",
+    //    // Tilføj flere komplimenter...
+    // };
+    // private Random random = new Random();
+    
+    // Tilføj metoder her, f.eks.:
+    // private void VisKompliment()
+    // {
+    //     int index = random.Next(komplimenter.Count);
+    //     kompliment = komplimenter[index];
+    // }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/2");
+    }
+} 

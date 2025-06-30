@@ -1,0 +1,113 @@
+@page "/solutions/7"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Live Teksttæller</PageTitle>
+
+<h1>Implementering: Live Teksttæller</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent med en <code>&lt;textarea&gt;</code> hvor brugeren kan skrive tekst, og vis under tekstfeltet hvor mange tegn og ord der er blevet skrevet, i realtid mens der skrives. For eksempel: "Tegn: 42, Ord: 8". Tællerne skal opdatere, mens brugeren taster (altså uden at skulle trykke på en knap).</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="textareaInput" class="form-label">Skriv noget tekst her:</label>
+            <textarea id="textareaInput" 
+                      class="form-control" 
+                      rows="5" 
+                      placeholder="Begynd at skrive noget tekst..." 
+                      @bind="tekst" 
+                      @bind:event="oninput">
+            </textarea>
+        </div>
+        
+        <div class="mt-4">
+            <div class="card text-dark bg-light">
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <div class="text-center py-3 rounded bg-primary text-white">
+                                <h5>Antal tegn</h5>
+                                <div class="display-4">@AntalTegn</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center py-3 rounded bg-success text-white">
+                                <h5>Antal ord</h5>
+                                <div class="display-4">@AntalOrd</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <h5>Yderligere tekststatistik:</h5>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Antal linjer:
+                    <span class="badge bg-primary rounded-pill">@AntalLinjer</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Bogstaver (a-å):
+                    <span class="badge bg-primary rounded-pill">@AntalBogstaver</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Tal (0-9):
+                    <span class="badge bg-primary rounded-pill">@AntalTal</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Specialtegn:
+                    <span class="badge bg-primary rounded-pill">@AntalSpecialTegn</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="mt-4">
+            <button class="btn btn-warning" @onclick="RydTekst">Ryd tekstfelt</button>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string tekst = "";
+    
+    // Grundlæggende beregninger
+    private int AntalTegn => tekst.Length;
+    
+    private int AntalOrd => string.IsNullOrWhiteSpace(tekst) 
+        ? 0 
+        : tekst.Split(new[] { ' ', '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries).Length;
+    
+    // Ekstra beregninger
+    private int AntalLinjer => string.IsNullOrEmpty(tekst) 
+        ? 0 
+        : tekst.Split('\n').Length;
+    
+    private int AntalBogstaver => tekst.Count(c => char.IsLetter(c));
+    
+    private int AntalTal => tekst.Count(c => char.IsDigit(c));
+    
+    private int AntalSpecialTegn => AntalTegn - AntalBogstaver - AntalTal - tekst.Count(c => char.IsWhiteSpace(c));
+    
+    private void RydTekst()
+    {
+        tekst = "";
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/7");
+    }
+} 

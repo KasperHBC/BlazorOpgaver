@@ -1,0 +1,52 @@
+@page "/student/28"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 28: Favorit-liste (watch-list)</PageTitle>
+
+<h1>Opgave 28: Favorit-liste (watch-list)</h1>
+
+@{
+    var task = TaskService.GetTaskById(28);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Oprette en <code>FavoriteService</code> til at håndtere favoritter på tværs af komponenter</li>
+            <li>Implementere metoder til at gemme/hente favoritter via localStorage (IJSRuntime)</li>
+            <li>Tilføje et hjerte-ikon på produktkort med mulighed for at tilføje/fjerne fra favoritter</li>
+            <li>Implementere en mekanisme til at opdatere favorit-tæller i top-menuen</li>
+            <li>Oprette en side der viser alle favorit-produkter</li>
+            <li>Sørge for at favoritstatus overlever genindlæsning af siden</li>
+        </ol>
+        
+        <p class="alert alert-warning">Bemærk: For at teste denne opgave skal du have produkter i databasen. Du kan oprette produkter gennem Opgave 25.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/28");
+    }
+} 

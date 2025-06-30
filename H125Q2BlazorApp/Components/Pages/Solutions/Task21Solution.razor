@@ -1,0 +1,154 @@
+@page "/solutions/21"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Password Validator</PageTitle>
+
+<h1>Implementering: Password Validator</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent til validering af passwords. Brugeren skal kunne indtaste et password og få direkte feedback om, hvor stærkt det er. Komponenten skal vise en styrkeindikator (fx en farveskala eller procent) og en liste over krav som passwords skal opfylde (med markering af hvilke, der er opfyldt).</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="password-input" class="form-label">Indtast et password:</label>
+            <div class="input-group">
+                <input id="password-input" 
+                       type="@(visPassword ? "text" : "password")" 
+                       class="form-control" 
+                       @bind-value="password" 
+                       @bind-value:event="oninput" 
+                       placeholder="Indtast dit password" />
+                <button class="btn btn-outline-secondary" type="button" @onclick="ToggleVisPassword">
+                    <i class="bi @(visPassword ? "bi-eye-slash" : "bi-eye")"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Styrkeindikator -->
+        <div class="mb-4">
+            <h5>Password styrke: <span class="@StyrkeTextKlasse">@StyrkeKategori</span></h5>
+            <div class="progress" style="height: 20px;">
+                <div class="progress-bar @StyrkeKlasse" 
+                     role="progressbar" 
+                     style="width: @StyrkeProcentvis%;" 
+                     aria-valuenow="@StyrkeProcentvis" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100">
+                    @StyrkeProcentvis%
+                </div>
+            </div>
+        </div>
+        
+        <!-- Krav liste -->
+        <div class="mb-4">
+            <h5>Password krav:</h5>
+            <ul class="list-group">
+                <li class="list-group-item @(harMinLængde ? "list-group-item-success" : "list-group-item-danger")">
+                    <i class="bi @(harMinLængde ? "bi-check-circle-fill" : "bi-x-circle-fill") me-2"></i>
+                    Mindst 8 tegn
+                </li>
+                <li class="list-group-item @(harStoreBogstaver ? "list-group-item-success" : "list-group-item-danger")">
+                    <i class="bi @(harStoreBogstaver ? "bi-check-circle-fill" : "bi-x-circle-fill") me-2"></i>
+                    Mindst ét stort bogstav (A-Z)
+                </li>
+                <li class="list-group-item @(harSmåBogstaver ? "list-group-item-success" : "list-group-item-danger")">
+                    <i class="bi @(harSmåBogstaver ? "bi-check-circle-fill" : "bi-x-circle-fill") me-2"></i>
+                    Mindst ét lille bogstav (a-z)
+                </li>
+                <li class="list-group-item @(harTal ? "list-group-item-success" : "list-group-item-danger")">
+                    <i class="bi @(harTal ? "bi-check-circle-fill" : "bi-x-circle-fill") me-2"></i>
+                    Mindst ét tal (0-9)
+                </li>
+                <li class="list-group-item @(harSpecialTegn ? "list-group-item-success" : "list-group-item-danger")">
+                    <i class="bi @(harSpecialTegn ? "bi-check-circle-fill" : "bi-x-circle-fill") me-2"></i>
+                    Mindst ét specialtegn (f.eks. @@, #, $, *, !)
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Tips -->
+        <div class="alert alert-secondary">
+            <h5>Tips til stærke passwords:</h5>
+            <ul>
+                <li>Brug en blanding af tegn (store/små bogstaver, tal, specialtegn)</li>
+                <li>Undgå almindelige ord eller navne</li>
+                <li>Jo længere password, jo bedre</li>
+                <li>Brug ikke det samme password til flere tjenester</li>
+                <li>Overvej at bruge en password manager</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string password = "";
+    private bool visPassword = false;
+    
+    // Valideringskrav
+    private bool harMinLængde => password.Length >= 8;
+    private bool harStoreBogstaver => System.Text.RegularExpressions.Regex.IsMatch(password, "[A-Z]");
+    private bool harSmåBogstaver => System.Text.RegularExpressions.Regex.IsMatch(password, "[a-z]");
+    private bool harTal => System.Text.RegularExpressions.Regex.IsMatch(password, "[0-9]");
+    private bool harSpecialTegn => System.Text.RegularExpressions.Regex.IsMatch(password, @"[^a-zA-Z0-9]");
+    
+    // Styrkeberegning
+    private int AntalOpfyldteKrav => 
+        (harMinLængde ? 1 : 0) + 
+        (harStoreBogstaver ? 1 : 0) + 
+        (harSmåBogstaver ? 1 : 0) + 
+        (harTal ? 1 : 0) + 
+        (harSpecialTegn ? 1 : 0);
+    
+    private int StyrkeProcentvis => (AntalOpfyldteKrav * 100) / 5; // 5 krav i alt
+    
+    private string StyrkeKategori => StyrkeProcentvis switch
+    {
+        0 => "Meget svag",
+        > 0 and < 40 => "Svag",
+        >= 40 and < 70 => "Medium",
+        >= 70 and < 100 => "Stærk",
+        100 => "Meget stærk",
+        _ => "Ukendt styrke"
+    };
+    
+    private string StyrkeKlasse => StyrkeProcentvis switch
+    {
+        0 => "bg-danger",
+        > 0 and < 40 => "bg-danger",
+        >= 40 and < 70 => "bg-warning",
+        >= 70 and < 100 => "bg-info",
+        100 => "bg-success",
+        _ => "bg-secondary"
+    };
+    
+    private string StyrkeTextKlasse => StyrkeProcentvis switch
+    {
+        0 => "text-danger",
+        > 0 and < 40 => "text-danger",
+        >= 40 and < 70 => "text-warning",
+        >= 70 and < 100 => "text-info",
+        100 => "text-success",
+        _ => "text-secondary"
+    };
+    
+    private void ToggleVisPassword()
+    {
+        visPassword = !visPassword;
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/21");
+    }
+} 

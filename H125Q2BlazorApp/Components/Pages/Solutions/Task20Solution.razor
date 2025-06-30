@@ -1,0 +1,247 @@
+@page "/solutions/20"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<PageTitle>Implementering: Mini-Spil (Hukommelsesspil)</PageTitle>
+
+<h1>Implementering: Mini-Spil (Hukommelsesspil)</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave implementerer et simpelt hukommelsesspil, hvor brugeren skal finde par af kort med samme farve eller symbol.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Hukommelsesspil</h5>
+    </div>
+    <div class="card-body">
+        @if (spilFuldført)
+        {
+            <div class="alert alert-success">
+                <h4>Tillykke! 🎉</h4>
+                <p>Du har fundet alle par på @antalForsøg forsøg.</p>
+                <button class="btn btn-primary" @onclick="StartNytSpil">Spil igen</button>
+            </div>
+        }
+        else
+        {
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="mb-0">Antal forsøg: <span class="badge bg-primary">@antalForsøg</span></p>
+                </div>
+                <div>
+                    <p class="mb-0">Par fundet: <span class="badge bg-success">@antalParFundet</span> af <span class="badge bg-secondary">@(kort.Count / 2)</span></p>
+                </div>
+            </div>
+        }
+
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-2">
+            @for (int i = 0; i < kort.Count; i++)
+            {
+                var index = i;
+                <div class="col">
+                    <div @onclick="() => VendKort(index)" 
+                         class="hukommelsesspil-kort @(kort[index].Vendt || kort[index].Fundet ? "vendt" : "")"
+                         style="@(kort[index].Fundet ? "visibility: hidden;" : "")">
+                        @if (kort[index].Vendt || kort[index].Fundet)
+                        {
+                            <div class="kort-indhold" style="background-color: @kort[index].Farve;">
+                                @kort[index].Symbol
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="kort-bagside">
+                                ?
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="mt-3">
+            <button class="btn btn-warning" @onclick="StartNytSpil">Nyt spil</button>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+<style>
+    .hukommelsesspil-kort {
+        aspect-ratio: 0.7;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease;
+        height: 80px;
+    }
+
+    .hukommelsesspil-kort:hover {
+        transform: translateY(-5px);
+    }
+
+    .hukommelsesspil-kort.vendt {
+        transform: rotateY(180deg);
+    }
+
+    .kort-bagside, .kort-indhold {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+
+    .kort-bagside {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .kort-indhold {
+        color: white;
+    }
+</style>
+
+@code {
+    private List<Kort> kort = new();
+    private int antalForsøg = 0;
+    private int antalParFundet = 0;
+    private bool spilFuldført = false;
+
+    private Kort? førstValgtKort = null;
+    private int? førstValgtIndex = null;
+
+    private System.Threading.Timer? timer;
+    private bool kanKlikke = true;
+
+    protected override void OnInitialized()
+    {
+        StartNytSpil();
+    }
+
+    private void StartNytSpil()
+    {
+        // Nulstil spillets tilstand
+        kort.Clear();
+        antalForsøg = 0;
+        antalParFundet = 0;
+        spilFuldført = false;
+        førstValgtKort = null;
+        førstValgtIndex = null;
+        kanKlikke = true;
+
+        // Opret par af kort med forskellige farver/symboler
+        var farver = new[] { "#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#33FFF1", "#F1FF33" };
+        var symboler = new[] { "★", "♥", "♦", "♠", "♣", "●" };
+
+        // Opret 6 par (12 kort)
+        for (int i = 0; i < 6; i++)
+        {
+            var farve = farver[i];
+            var symbol = symboler[i];
+
+            // Tilføj to ens kort (et par)
+            kort.Add(new Kort { Farve = farve, Symbol = symbol });
+            kort.Add(new Kort { Farve = farve, Symbol = symbol });
+        }
+
+        // Bland kortene
+        kort = kort.OrderBy(k => Guid.NewGuid()).ToList();
+
+        StateHasChanged();
+    }
+
+    private void VendKort(int index)
+    {
+        // Undgå at klikke hvis allerede et par vendes, eller hvis kortet allerede er fundet/vendt
+        if (!kanKlikke || kort[index].Vendt || kort[index].Fundet)
+            return;
+
+        // Hvis dette er det første kort i et forsøg
+        if (førstValgtKort == null)
+        {
+            førstValgtKort = kort[index];
+            førstValgtIndex = index;
+            kort[index].Vendt = true;
+        }
+        // Hvis dette er det andet kort i et forsøg
+        else
+        {
+            kort[index].Vendt = true;
+            antalForsøg++;
+
+            // Tjek om kortene matcher (samme farve og symbol)
+            if (førstValgtKort.Farve == kort[index].Farve && førstValgtKort.Symbol == kort[index].Symbol)
+            {
+                // Match fundet!
+                kort[(int)førstValgtIndex].Fundet = true;
+                kort[index].Fundet = true;
+                antalParFundet++;
+
+                // Nulstil valg
+                førstValgtKort = null;
+                førstValgtIndex = null;
+
+                // Tjek om spillet er færdigt
+                if (antalParFundet >= kort.Count / 2)
+                {
+                    spilFuldført = true;
+                }
+            }
+            else
+            {
+                // Ingen match, vend kortene tilbage efter kort tid
+                kanKlikke = false;
+                timer?.Dispose();
+
+                // Brug en timer til at vende kortene tilbage efter 1 sekund
+                timer = new System.Threading.Timer(state =>
+                {
+                    InvokeAsync(() =>
+                    {
+                        kort[(int)førstValgtIndex].Vendt = false;
+                        kort[index].Vendt = false;
+                        førstValgtKort = null;
+                        førstValgtIndex = null;
+                        kanKlikke = true;
+                        StateHasChanged();
+                    });
+                }, null, 1000, Timeout.Infinite);
+            }
+        }
+
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/20");
+    }
+
+    private class Kort
+    {
+        public string Farve { get; set; } = "";
+        public string Symbol { get; set; } = "";
+        public bool Vendt { get; set; } = false;
+        public bool Fundet { get; set; } = false;
+    }
+} 

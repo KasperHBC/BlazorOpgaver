@@ -1,0 +1,52 @@
+@page "/student/27"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Opgave 27: Produktdetalje og 'Send besked'</PageTitle>
+
+<h1>Opgave 27: Produktdetalje og 'Send besked'</h1>
+
+@{
+    var task = TaskService.GetTaskById(27);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Kom i gang</h4>
+    </div>
+    <div class="card-body">
+        <p>For at løse denne opgave skal du:</p>
+        <ol>
+            <li>Oprette en ny <code>Message</code> model klasse med egenskaber som Id, ProductId, Text, CreatedAt, etc.</li>
+            <li>Tilføje en <code>List&lt;Message&gt;</code> egenskab til <code>Product</code> klassen</li>
+            <li>Oprette en ny <code>ProductDetail.razor</code> side med route parameter for produkt-id: <code>@@page "/product/{Id:int}"</code></li>
+            <li>Tilføje navigations-kode til produktkort, så klik sender brugeren til detaljeside</li>
+            <li>Implementere en formular til at sende besked på detaljesiden</li>
+            <li>Vise liste af tidligere beskeder på produktet</li>
+        </ol>
+        
+        <p class="alert alert-warning">Bemærk: For at teste denne opgave skal du først oprette nogle produkter i Opgave 25.</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/27");
+    }
+} 

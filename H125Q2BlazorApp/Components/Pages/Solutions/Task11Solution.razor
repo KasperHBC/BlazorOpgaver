@@ -1,0 +1,131 @@
+@page "/solutions/11"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Stjernevurdering</PageTitle>
+
+<h1>Implementering: Stjernevurdering</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en stjernevurderings-komponent (5-stjernet rating system). Vis 5 stjerne-ikoner. Når brugeren hover eller klikker på en stjerne, skal alle stjerner til og med den position markeres (fyldes), og resten være tomme. Ved klik fastsættes vurderingen, og du kan fx vise en besked "Du gav X stjerner".</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <h4 class="mb-3">Giv din vurdering:</h4>
+        <div class="mb-4">
+            <div style="font-size: 2.5rem;">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    int stjerne = i;
+                    <span class="@GetStjerneKlasse(stjerne)" 
+                       style="cursor: pointer; padding-right: 5px;" 
+                       @onmouseover="() => HandleMouseOver(stjerne)"
+                       @onmouseout="HandleMouseOut"
+                       @onclick="() => SætRating(stjerne)">★</span>
+                }
+            </div>
+            
+            @if (aktuelRating > 0)
+            {
+                <div class="alert alert-success mt-3">
+                    <p class="mb-0">Du gav @aktuelRating @(aktuelRating == 1 ? "stjerne" : "stjerner")! Tak for din vurdering.</p>
+                </div>
+            }
+            else
+            {
+                <div class="text-muted mt-3">
+                    <p class="mb-0">Klik på en stjerne for at give din vurdering</p>
+                </div>
+            }
+            
+            <div class="mt-3">
+                <button class="btn btn-secondary" @onclick="NulstilRating">Nulstil</button>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Visuel forklaring</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><span class="star-empty">★</span> Tom stjerne: Ingen vurdering givet</p>
+                        <p><span class="star-filled">★</span> Fyldt stjerne: Vurdering givet</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Aktuel rating: @aktuelRating</p>
+                        <p>Hover rating: @hoverRating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private int aktuelRating = 0;
+    private int hoverRating = 0;
+    
+    private void HandleMouseOver(int stjerne)
+    {
+        hoverRating = stjerne;
+    }
+    
+    private void HandleMouseOut()
+    {
+        hoverRating = 0;
+    }
+    
+    private void SætRating(int stjerne)
+    {
+        aktuelRating = stjerne;
+    }
+    
+    private void NulstilRating()
+    {
+        aktuelRating = 0;
+    }
+    
+    private string GetStjerneKlasse(int stjerne)
+    {
+        if (hoverRating >= stjerne)
+        {
+            return "star-filled";
+        }
+        else if (aktuelRating >= stjerne)
+        {
+            return "star-filled";
+        }
+        else
+        {
+            return "star-empty";
+        }
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/11");
+    }
+}
+
+<style>
+    .star-filled {
+        color: gold;
+        font-size: 2.5rem;
+    }
+    
+    .star-empty {
+        color: #ccc;
+        font-size: 2.5rem;
+    }
+</style> 

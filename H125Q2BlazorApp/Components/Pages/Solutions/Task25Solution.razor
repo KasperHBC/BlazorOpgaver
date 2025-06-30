@@ -1,0 +1,206 @@
+@page "/solutions/25"
+@rendermode InteractiveServer
+@using System.IO
+@using H125Q2BlazorApp.Models
+@using H125Q2BlazorApp.Services
+@using Task = System.Threading.Tasks.Task
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment Environment
+@inject ProductService ProductService
+
+<PageTitle>Implementering: Opret-annonce formular</PageTitle>
+
+<h1>Implementering: Opret-annonce formular</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer brugen af Blazor's EditForm med DataAnnotations-validering og en genbrugelig service til datahåndtering.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="m-0">Opret ny annonce</h5>
+            </div>
+            <div class="card-body">
+                <EditForm Model="@product" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Titel</label>
+                        <InputText id="title" @bind-Value="product.Title" class="form-control" />
+                        <ValidationMessage For="@(() => product.Title)" class="text-danger" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Pris (DKK)</label>
+                        <InputNumber id="price" @bind-Value="product.Price" class="form-control" />
+                        <ValidationMessage For="@(() => product.Price)" class="text-danger" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Kategori</label>
+                        <InputSelect id="category" @bind-Value="product.Category" class="form-select">
+                            <option value="">Vælg kategori...</option>
+                            @foreach (var category in ProductService.Categories)
+                            {
+                                <option value="@category">@category</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => product.Category)" class="text-danger" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Beskrivelse</label>
+                        <InputTextArea id="description" @bind-Value="product.Description" class="form-control" rows="5" />
+                        <ValidationMessage For="@(() => product.Description)" class="text-danger" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Billede</label>
+                        <InputFile OnChange="UploadImage" class="form-control" accept="image/*" />
+                        <div class="form-text">Vælg et billede til din annonce. Maks størrelse: 5 MB.</div>
+                        
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger mt-2">
+                                @errorMessage
+                            </div>
+                        }
+                        
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <div class="mt-2">
+                                <img src="@product.ImageUrl" alt="Preview" class="img-thumbnail" style="max-height: 150px" />
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Opret annonce</button>
+                        <button type="button" class="btn btn-outline-secondary" @onclick="ResetForm">Nulstil</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="m-0">Annoncer (@ProductService.GetAllProducts().Count)</h5>
+            </div>
+            <div class="card-body p-0">
+                @if (ProductService.GetAllProducts().Count == 0)
+                {
+                    <div class="p-4 text-center text-muted">
+                        <p>Ingen annoncer endnu.</p>
+                        <p>Opret en annonce ved at udfylde formularen.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var p in ProductService.GetAllProducts())
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex">
+                                    @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                    {
+                                        <div class="me-3">
+                                            <img src="@p.ImageUrl" alt="@p.Title" style="width: 60px; height: 60px; object-fit: cover;" class="rounded" />
+                                        </div>
+                                    }
+                                    <div>
+                                        <h6 class="mb-1">@p.Title</h6>
+                                        <p class="mb-1 text-primary">@p.Price.ToString("C")</p>
+                                        <small class="text-muted">@p.Category</small>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private Product product = new Product();
+    private string? errorMessage;
+    
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            errorMessage = null;
+            var file = e.File;
+            
+            // Valider filtype og størrelse
+            if (!file.ContentType.StartsWith("image/"))
+            {
+                errorMessage = "Kun billedfiler er tilladt";
+                return;
+            }
+            
+            if (file.Size > 5 * 1024 * 1024)
+            {
+                errorMessage = "Filen er for stor. Maksimal størrelse er 5 MB";
+                return;
+            }
+            
+            // Generer unikt filnavn
+            var extension = Path.GetExtension(file.Name);
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            
+            // Sørg for at uploads-mappen eksisterer
+            var uploadsFolder = Path.Combine(Environment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            
+            // Gem filen
+            var filePath = Path.Combine(uploadsFolder, fileName);
+            using (var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024))
+            using (var fs = new FileStream(filePath, FileMode.Create))
+            {
+                await stream.CopyToAsync(fs);
+            }
+            
+            // Opdater produkt med url til det nye billede
+            product.ImageUrl = $"/uploads/{fileName}";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Fejl under upload: {ex.Message}";
+        }
+    }
+    
+    private void HandleValidSubmit()
+    {
+        // Tilføj produktet til servicen
+        ProductService.AddProduct(product);
+        
+        // Nulstil formularen
+        ResetForm();
+    }
+    
+    private void ResetForm()
+    {
+        // Opret nyt produkt-objekt for at nulstille formularen
+        product = new Product();
+        errorMessage = null;
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/25");
+    }
+} 

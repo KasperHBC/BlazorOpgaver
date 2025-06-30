@@ -1,0 +1,128 @@
+@page "/solutions/5"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Implementering: Tilføj & Fjern fra Liste</PageTitle>
+
+<h1>Implementering: Tilføj & Fjern fra Liste</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent, hvor brugeren kan tilføje elementer til en liste og fjerne dem igen. For eksempel en simpel "to-do" liste: Der er et tekstfelt og en "Tilføj" knap, som føjer teksten til en liste vist nedenunder. Hvert listeelement kan have en lille "Fjern" knap ved siden af, som fjerner det element fra listen igen.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" 
+                       placeholder="Skriv et nyt element" 
+                       @bind="nytElement" 
+                       @bind:event="oninput"
+                       @onkeypress="TilføjVedEnter" />
+                <button class="btn btn-primary" @onclick="TilføjElement">Tilføj</button>
+            </div>
+            @if (!string.IsNullOrEmpty(fejlbesked))
+            {
+                <div class="text-danger mt-1">
+                    @fejlbesked
+                </div>
+            }
+        </div>
+
+        <div class="mt-4">
+            <h5>Elementer i listen (@elementer.Count):</h5>
+            @if (elementer.Count == 0)
+            {
+                <div class="alert alert-secondary">
+                    Listen er tom. Tilføj nogle elementer ovenfor.
+                </div>
+            }
+            else
+            {
+                <ul class="list-group">
+                    @foreach (var element in elementer)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @element
+                            <button class="btn btn-sm btn-danger" @onclick="() => FjernElement(element)">
+                                Fjern
+                            </button>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+        
+        @if (elementer.Count > 0)
+        {
+            <div class="mt-3">
+                <button class="btn btn-warning" @onclick="RydListe">Ryd hele listen</button>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string nytElement = "";
+    private List<string> elementer = new List<string>();
+    private string fejlbesked = "";
+    
+    protected override void OnInitialized()
+    {
+        // Tilføj nogle starteksempler
+        elementer.Add("Køb mælk");
+        elementer.Add("Lav Blazor-opgaver");
+        elementer.Add("Lær om komponentudvikling");
+    }
+    
+    private void TilføjElement()
+    {
+        fejlbesked = "";
+        
+        if (string.IsNullOrWhiteSpace(nytElement))
+        {
+            fejlbesked = "Du skal skrive noget tekst først";
+            return;
+        }
+        
+        if (elementer.Contains(nytElement))
+        {
+            fejlbesked = "Dette element findes allerede i listen";
+            return;
+        }
+        
+        elementer.Add(nytElement);
+        nytElement = ""; // Nulstil input-feltet
+    }
+    
+    private void FjernElement(string element)
+    {
+        elementer.Remove(element);
+    }
+    
+    private void RydListe()
+    {
+        elementer.Clear();
+    }
+    
+    private void TilføjVedEnter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            TilføjElement();
+        }
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/5");
+    }
+} 

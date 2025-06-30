@@ -1,0 +1,280 @@
+@page "/solutions/13"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<PageTitle>Implementering: Nedtællingstimer</PageTitle>
+
+<h1>Implementering: Nedtællingstimer</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en nedtællingstimer, hvor brugeren kan indtaste timer, minutter og sekunder og starte en nedtælling. Når nedtællingen er i gang, skal der vises hvor meget tid der er tilbage, og brugeren skal kunne pause, genoptage og nulstille timeren. Der skal også vises en visuel indikator af fremskridtet (fx en progressbar). Når tiden udløber, skal brugeren få en meddelelse og eventuelt en lyd.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Din implementering</h5>
+    </div>
+    <div class="card-body">
+        @if (!erTimerIGang && !erTimerFærdig)
+        {
+            <!-- Input område til at indstille tiden -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="timer-input" class="form-label">Timer</label>
+                        <input id="timer-input" 
+                               type="number" 
+                               class="form-control" 
+                               min="0" 
+                               max="24" 
+                               @bind="timer" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="minutter-input" class="form-label">Minutter</label>
+                        <input id="minutter-input" 
+                               type="number" 
+                               class="form-control" 
+                               min="0" 
+                               max="59" 
+                               @bind="minutter" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="sekunder-input" class="form-label">Sekunder</label>
+                        <input id="sekunder-input" 
+                               type="number" 
+                               class="form-control" 
+                               min="0" 
+                               max="59" 
+                               @bind="sekunder" />
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hurtige tidsforslag -->
+            <div class="mb-4">
+                <h5>Hurtige tidsindstillinger:</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-primary" @onclick="() => VælgHurtigTid(0, 0, 10)">10 sekunder</button>
+                    <button class="btn btn-outline-primary" @onclick="() => VælgHurtigTid(0, 1, 0)">1 minut</button>
+                    <button class="btn btn-outline-primary" @onclick="() => VælgHurtigTid(0, 5, 0)">5 minutter</button>
+                    <button class="btn btn-outline-primary" @onclick="() => VælgHurtigTid(0, 15, 0)">15 minutter</button>
+                    <button class="btn btn-outline-primary" @onclick="() => VælgHurtigTid(1, 0, 0)">1 time</button>
+                </div>
+            </div>
+        }
+        
+        <!-- Timer display -->
+        <div class="row mb-4">
+            <div class="col-md-12 text-center">
+                <div class="display-1 mb-3 @(restTid.TotalSeconds < 10 && erTimerIGang ? "text-danger" : "")">
+                    @FormatterTid(restTid)
+                </div>
+                
+                @if (erTimerFærdig)
+                {
+                    <div class="alert alert-success">
+                        <h4><i class="bi bi-alarm me-2"></i>Tiden er udløbet!</h4>
+                        <p>Din timer er færdig.</p>
+                    </div>
+                }
+                
+                <!-- Progressbar -->
+                @if (erTimerIGang || erTimerFærdig)
+                {
+                    <div class="progress mb-3" style="height: 25px;">
+                        <div class="progress-bar @(restTid.TotalSeconds < 10 ? "bg-danger" : "bg-success")" 
+                             role="progressbar" 
+                             style="width: @(BeregnFremskridt())%;" 
+                             aria-valuenow="@BeregnFremskridt()" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            @BeregnFremskridt()%
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <!-- Kontrolknapper -->
+        <div class="d-flex justify-content-center gap-2 mb-4">
+            @if (!erTimerIGang && !erTimerFærdig)
+            {
+                <button class="btn btn-success btn-lg" 
+                        @onclick="StartTimer" 
+                        disabled="@(totalTid.TotalSeconds <= 0)">
+                    <i class="bi bi-play-fill me-2"></i>Start
+                </button>
+            }
+            else if (erTimerIGang)
+            {
+                <button class="btn btn-warning btn-lg" @onclick="PauseTimer">
+                    <i class="bi bi-pause-fill me-2"></i>Pause
+                </button>
+            }
+            else if (!erTimerIGang && !erTimerFærdig && restTid.TotalSeconds > 0)
+            {
+                <button class="btn btn-success btn-lg" @onclick="GenoptagTimer">
+                    <i class="bi bi-play-fill me-2"></i>Genoptag
+                </button>
+            }
+            
+            @if (restTid.TotalSeconds > 0 || erTimerFærdig)
+            {
+                <button class="btn btn-danger btn-lg" @onclick="NulstilTimer">
+                    <i class="bi bi-x-circle-fill me-2"></i>Nulstil
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private int timer = 0;
+    private int minutter = 1;
+    private int sekunder = 0;
+    
+    private TimeSpan totalTid;
+    private TimeSpan restTid;
+    private System.Timers.Timer? timerObj;
+    private bool erTimerIGang = false;
+    private bool erTimerFærdig = false;
+    private DateTime startTidspunkt;
+    private DateTime pauseTidspunkt;
+    
+    protected override void OnInitialized()
+    {
+        timerObj = new System.Timers.Timer(100); // Opdaterer hver 1/10 sekund for glidende opdatering
+        timerObj.Elapsed += TimerTick;
+        timerObj.AutoReset = true;
+        
+        // Beregn initial totalTid og restTid
+        BeregnTid();
+    }
+    
+    // Beregner totalTid og restTid baseret på input værdierne
+    private void BeregnTid()
+    {
+        totalTid = new TimeSpan(timer, minutter, sekunder);
+        restTid = totalTid;
+    }
+    
+    // Formatterer en TimeSpan til et pænt ur-format
+    private string FormatterTid(TimeSpan tid)
+    {
+        return $"{(int)tid.TotalHours:00}:{tid.Minutes:00}:{tid.Seconds:00}";
+    }
+    
+    // Beregner procentvis fremskridt af timeren
+    private int BeregnFremskridt()
+    {
+        if (totalTid.TotalSeconds == 0) return 0;
+        double procent = 100 - ((restTid.TotalSeconds / totalTid.TotalSeconds) * 100);
+        return (int)Math.Round(procent);
+    }
+    
+    // Starter timeren
+    private void StartTimer()
+    {
+        if (totalTid.TotalSeconds <= 0) return;
+        
+        // Beregn tiden igen for at være sikker
+        BeregnTid();
+        
+        erTimerIGang = true;
+        erTimerFærdig = false;
+        startTidspunkt = DateTime.Now;
+        
+        timerObj?.Start();
+    }
+    
+    // Pauser timeren
+    private void PauseTimer()
+    {
+        if (!erTimerIGang) return;
+        
+        erTimerIGang = false;
+        pauseTidspunkt = DateTime.Now;
+        timerObj?.Stop();
+    }
+    
+    // Genoptager timeren efter pause
+    private void GenoptagTimer()
+    {
+        if (erTimerIGang || erTimerFærdig) return;
+        
+        erTimerIGang = true;
+        startTidspunkt = startTidspunkt.Add(DateTime.Now - pauseTidspunkt);
+        timerObj?.Start();
+    }
+    
+    // Nulstiller timeren
+    private void NulstilTimer()
+    {
+        timerObj?.Stop();
+        erTimerIGang = false;
+        erTimerFærdig = false;
+        BeregnTid();
+    }
+    
+    // Vælger en hurtig forudindstillet tid
+    private void VælgHurtigTid(int t, int m, int s)
+    {
+        timer = t;
+        minutter = m;
+        sekunder = s;
+        BeregnTid();
+    }
+    
+    // Timer event handler
+    private void TimerTick(object? sender, System.Timers.ElapsedEventArgs e)
+    {
+        // Beregn, hvor meget tid der er gået siden start
+        TimeSpan gåetTid = DateTime.Now - startTidspunkt;
+        
+        // Beregn den resterende tid
+        restTid = totalTid - gåetTid;
+        
+        // Hvis tiden er udløbet eller mindre end 0
+        if (restTid.TotalSeconds <= 0)
+        {
+            restTid = TimeSpan.Zero;
+            erTimerIGang = false;
+            erTimerFærdig = true;
+            timerObj?.Stop();
+            AfspilLyd();
+        }
+        
+        // Informer Blazor om, at UI skal opdateres
+        InvokeAsync(StateHasChanged);
+    }
+    
+    // Afspiller en lyd, når timeren er færdig
+    private void AfspilLyd()
+    {
+        // I en rigtig implementation ville dette afspille en lyd
+        // Men i Blazor WebAssembly/Server kræver dette JS Interop
+        // Koden vil blive for kompliceret for denne opgave
+    }
+    
+    // IDisposable implementation
+    public void Dispose()
+    {
+        timerObj?.Stop();
+        timerObj?.Dispose();
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/13");
+    }
+} 

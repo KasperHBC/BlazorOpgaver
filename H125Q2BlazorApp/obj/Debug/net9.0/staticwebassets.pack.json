@@ -1,0 +1,241 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\H125Q2BlazorApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\H125Q2BlazorApp.oblt01i47l.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\1e321d3d-372b-477a-9ade-869df22e99ec.png",
+      "PackagePath": "staticwebassets\\uploads\\1e321d3d-372b-477a-9ade-869df22e99ec.png"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\2606d0df-0226-4260-a7bf-0f55aba3c6a8.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2606d0df-0226-4260-a7bf-0f55aba3c6a8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\80197a77-ea30-46ec-bef6-4bfa22040827.png",
+      "PackagePath": "staticwebassets\\uploads\\80197a77-ea30-46ec-bef6-4bfa22040827.png"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\a37e39bc-0b90-43c9-9850-fb7fdded2ad3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\a37e39bc-0b90-43c9-9850-fb7fdded2ad3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\b8059f9d-e772-4f2b-8c1b-453f64192aa7.jpg",
+      "PackagePath": "staticwebassets\\uploads\\b8059f9d-e772-4f2b-8c1b-453f64192aa7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\e95c4926-9666-4996-8bca-27074f52e726.png",
+      "PackagePath": "staticwebassets\\uploads\\e95c4926-9666-4996-8bca-27074f52e726.png"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.H125Q2BlazorApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.H125Q2BlazorApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.H125Q2BlazorApp.props",
+      "PackagePath": "build\\H125Q2BlazorApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.H125Q2BlazorApp.props",
+      "PackagePath": "buildMultiTargeting\\H125Q2BlazorApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.H125Q2BlazorApp.props",
+      "PackagePath": "buildTransitive\\H125Q2BlazorApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

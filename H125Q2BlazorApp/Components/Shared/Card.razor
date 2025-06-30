@@ -1,0 +1,27 @@
+@* Genanvendelig kort-komponent *@
+<div class="card shadow-sm mb-4 h-100">
+    <div class="card-body d-flex flex-column p-3">
+        @if (!string.IsNullOrEmpty(BilledeUrl))
+        {
+            <div class="text-center mb-3">
+                <img src="@BilledeUrl" alt="@Titel" class="card-img-top rounded" style="max-height: 200px; object-fit: cover;" />
+            </div>
+        }
+        <h3 class="card-title">@Titel</h3>
+        <p class="card-text flex-grow-1">@Beskrivelse</p>
+        
+        @if (ChildContent != null)
+        {
+            <div class="mt-auto">
+                @ChildContent
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Titel { get; set; } = "";
+    [Parameter] public string Beskrivelse { get; set; } = "";
+    [Parameter] public string BilledeUrl { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+} 

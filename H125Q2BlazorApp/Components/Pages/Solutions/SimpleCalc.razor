@@ -1,0 +1,66 @@
+@page "/simple-calculator"
+@rendermode InteractiveServer
+
+<h3>Simpel regnemaskine</h3>
+
+<div class="mb-3">
+    <label for="value1" class="form-label">Første tal:</label>
+    <input id="value1" type="number" class="form-control"
+           @bind="value1" @bind:event="oninput" />
+</div>
+
+<div class="mb-3">
+    <label for="value2" class="form-label">Andet tal:</label>
+    <input id="value2" type="number" class="form-control"
+           @bind="value2" @bind:event="oninput" />
+</div>
+
+<div class="mb-3">
+    <label for="op" class="form-label">Operation:</label>
+    <select id="op" class="form-select" @bind="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+</div>
+
+<button class="btn btn-primary mb-3" @onclick="Beregn">Beregn</button>
+
+<div class="mb-3">
+    <label for="resultBox" class="form-label">Resultat:</label>
+    <input id="resultBox" type="text" class="form-control"
+           value="@ResultText" readonly />
+</div>
+
+@code {
+    private double value1;
+    private double value2;
+    private string op = "+";
+    private string ResultText = "";
+
+    private void Beregn()
+    {
+        double res;
+
+        switch (op)
+        {
+            case "+":  res = value1 + value2; break;
+            case "-":  res = value1 - value2; break;
+            case "*":  res = value1 * value2; break;
+            case "/":
+                if (value2 == 0)
+                {
+                    ResultText = $"{value1} / {value2} = ??  (Kan ikke dividere med nul)";
+                    return;
+                }
+                res = value1 / value2;
+                break;
+            default:
+                return;
+        }
+
+        // Sæt streng med både regnestykke og svar
+        ResultText = $"{value1} {op} {value2} = {res}";
+    }
+}

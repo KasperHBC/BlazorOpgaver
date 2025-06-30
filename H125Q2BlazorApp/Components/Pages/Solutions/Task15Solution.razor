@@ -1,0 +1,193 @@
+@page "/solutions/15"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<PageTitle>Implementering: Søgefilter for Liste</PageTitle>
+
+<h1>Implementering: Søgefilter for Liste</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Lav en komponent, der viser en liste af elementer (fx en liste af produktnavne, byer, eller lignende) og giver brugeren mulighed for at filtrere listen via et søgefelt. Når brugeren skriver i søgefeltet, skal listen automatisk (løbende) filtrere de elementer, der indeholder den indtastede tekst. Søgningen kan være case-insensitive for bedre brugeroplevelse.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">Søgefilter Implementering</h5>
+        <span class="badge bg-primary">@filtreredeByer.Count() elementer</span>
+    </div>
+    <div class="card-body">
+        <h4>Demonstration af søgefilter</h4>
+        <p>Her kan du søge i en liste af danske byer. Listen filtreres automatisk mens du skriver med en lille forsinkelse (debouncing).</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Søg i byer..." 
+                           @bind-value="søgeTekstVisning" 
+                           @bind-value:event="oninput"
+                           @onkeyup="SøgetekstÆndret" />
+                    @if (!string.IsNullOrEmpty(søgeTekst))
+                    {
+                        <button class="btn btn-outline-secondary" @onclick="NulstilSøgning">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    }
+                </div>
+
+                @if (søger)
+                {
+                    <div class="d-flex justify-content-center my-3">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Søger...</span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="list-group">
+                        @if (!filtreredeByer.Any())
+                        {
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Ingen byer matcher din søgning
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="list-group my-3">
+                                <Virtualize Items="@filtreredeByer.ToList()" Context="by" TItem="string">
+                                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        @HighlightSearchTerm(by, søgeTekst)
+                                        <span class="badge bg-secondary">@by.Length tegn</span>
+                                    </div>
+                                </Virtualize>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Om søgeimplementeringen</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Denne implementering indeholder følgende funktioner:</p>
+                        <ul>
+                            <li>Debouncing (forsinkelse) af søgningen for at optimere performance</li>
+                            <li>Case-insensitiv søgning for bedre brugeroplevelse</li>
+                            <li>Fremhævning af søgeord i resultaterne</li>
+                            <li>Mulighed for at nulstille søgningen med et klik</li>
+                            <li>Virtualiseret liste for effektiv rendering af store datasæt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private string søgeTekst = "";
+    private string søgeTekstVisning = "";
+    private bool søger = false;
+    private System.Threading.Timer? debounceTimer;
+    
+    private List<string> alleByer = new()
+    {
+        "København", "Aarhus", "Odense", "Aalborg", "Esbjerg",
+        "Randers", "Kolding", "Horsens", "Vejle", "Roskilde",
+        "Herning", "Helsingør", "Silkeborg", "Næstved", "Fredericia",
+        "Viborg", "Køge", "Holstebro", "Taastrup", "Sønderborg",
+        "Hillerød", "Slagelse", "Gentofte", "Hørsholm", "Haderslev", 
+        "Kalundborg", "Skive", "Aabenraa", "Assens", "Brønderslev",
+        "Dragør", "Egå", "Faaborg", "Gilleleje", "Haslev"
+    };
+
+    private IEnumerable<string> filtreredeByer => 
+        string.IsNullOrWhiteSpace(søgeTekst)
+            ? alleByer
+            : alleByer.Where(b => b.Contains(søgeTekst, StringComparison.OrdinalIgnoreCase))
+                     .OrderBy(b => !b.StartsWith(søgeTekst, StringComparison.OrdinalIgnoreCase))
+                     .ThenBy(b => b);
+
+    private void SøgetekstÆndret()
+    {
+        søger = true;
+        
+        // Nulstil eksisterende timer hvis der er en
+        debounceTimer?.Dispose();
+        
+        // Start ny timer med 300ms debounce
+        debounceTimer = new System.Threading.Timer(_ =>
+        {
+            // Invoke asynkront for at opdatere UI på UI tråd
+            InvokeAsync(() =>
+            {
+                søgeTekst = søgeTekstVisning;
+                søger = false;
+                StateHasChanged();
+            });
+        }, null, 300, System.Threading.Timeout.Infinite);
+    }
+    
+    private void NulstilSøgning()
+    {
+        søgeTekst = "";
+        søgeTekstVisning = "";
+    }
+    
+    // Funktion til at fremhæve søgeordet i resultaterne
+    private RenderFragment HighlightSearchTerm(string text, string searchTerm)
+    {
+        return builder =>
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                builder.AddContent(0, text);
+                return;
+            }
+            
+            int index = text.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase);
+            if (index == -1)
+            {
+                builder.AddContent(0, text);
+                return;
+            }
+            
+            // Tekst før søgeordet
+            builder.AddContent(1, text.Substring(0, index));
+            
+            // Søgeordet fremhævet
+            builder.OpenElement(2, "span");
+            builder.AddAttribute(3, "class", "bg-warning");
+            builder.AddContent(4, text.Substring(index, searchTerm.Length));
+            builder.CloseElement();
+            
+            // Tekst efter søgeordet
+            builder.AddContent(5, text.Substring(index + searchTerm.Length));
+        };
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/15");
+    }
+    
+    public void Dispose()
+    {
+        debounceTimer?.Dispose();
+    }
+} 

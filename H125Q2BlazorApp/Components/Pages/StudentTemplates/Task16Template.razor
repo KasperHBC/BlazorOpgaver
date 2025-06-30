@@ -1,0 +1,71 @@
+@page "/student/16"
+@rendermode InteractiveServer
+@inject H125Q2BlazorApp.Services.TaskService TaskService
+@inject NavigationManager NavigationManager
+
+@* 
+    INSTRUKTION TIL ELEVEN:
+    ======================
+    Dette er din skabelon til at implementere opgave 16: Tilfældig Citat Generator.
+    
+    Du skal lave en komponent, der viser et tilfældigt citat fra en liste af citater.
+    Hver gang brugeren klikker på en knap, skal der vises et nyt tilfældigt citat.
+    Citatet skal vises med forfatter og evt. et relevant ikon.
+    
+    Følg opgavebeskrivelsen og hints nedenfor.
+*@
+
+<PageTitle>Opgave 16: Tilfældig Citat Generator</PageTitle>
+
+<h1>Opgave 16: Tilfældig Citat Generator</h1>
+
+@{
+    var task = TaskService.GetTaskById(16);
+    if (task != null)
+    {
+        <div class="alert alert-info">
+            <h4>Opgavebeskrivelse:</h4>
+            <p>@task.Description</p>
+            
+            <h5 class="mt-3">Hints:</h5>
+            <pre>@task.Hints</pre>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>Opgave 16 er ikke defineret i TaskService endnu. Tilføj den først i TaskService.cs.</p>
+        </div>
+    }
+}
+
+@* 
+    DIN OPGAVELØSNING:
+    ==================
+    Tilføj HTML-markup herunder, f.eks. et område der viser citatet og forfatteren,
+    en knap til at vælge et nyt citat, og evt. en Twitter-del knap.
+    Tilføj også eventvariabler og funktioner i @code-sektionen.
+*@
+
+
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til opgavedetaljer</button>
+</div>
+
+@code {
+    // Erklær dine variabler her, f.eks.:
+    // private class Citat { ... }
+    // private List<Citat> citater = new() { ... };
+    // private Citat valgtCitat;
+    // private Random random = new Random();
+    
+    // Tilføj metoder her, f.eks.:
+    // private void VælgNytCitat() { ... }
+    
+    // Metode til at navigere tilbage til opgavedetaljer
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/16");
+    }
+} 

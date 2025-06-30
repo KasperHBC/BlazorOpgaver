@@ -1,0 +1,109 @@
+@page "/solutions/27"
+@rendermode InteractiveServer
+@using H125Q2BlazorApp.Models
+@using H125Q2BlazorApp.Services
+@inject NavigationManager NavigationManager
+@inject ProductService ProductService
+
+<PageTitle>Implementering: Produktdetalje og Send besked</PageTitle>
+
+<h1>Implementering: Produktdetalje og Send besked</h1>
+
+<div class="alert alert-info mb-4">
+    <h4>Opgaveinfo</h4>
+    <p>Denne opgave demonstrerer produktdetailsider via routing og en simpel beskedfunktion.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="m-0">Produktpanel</h5>
+    </div>
+    <div class="card-body">
+        <p>Denne løsning indeholder to komponenter:</p>
+        <ol>
+            <li>En produktliste (nedenfor) hvor hvert produkt kan klikkes for at navigere til detaljer</li>
+            <li>En detaljeside der viser produktets information og en beskedformular</li>
+        </ol>
+        <p>Bemærk: Du skal først have oprettet produkter via opgave 25 for at bruge denne løsning.</p>
+        
+        <h5 class="mt-4">Tilgængelige produkter</h5>
+        
+        @if (ProductService.GetAllProducts().Count == 0)
+        {
+            <div class="alert alert-warning">
+                Der er ingen produkter oprettet endnu. 
+                <a href="/solutions/25" class="alert-link">Klik her for at oprette produkter</a>
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
+                @foreach (var product in ProductService.GetAllProducts())
+                {
+                    <div class="col">
+                        <div class="card h-100 product-card" @onclick="() => NavigateToProduct(product.Id)">
+                            <div class="position-relative">
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Title" style="height: 180px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                        <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                                    </div>
+                                }
+                                <div class="position-absolute bottom-0 end-0 p-2">
+                                    <span class="badge bg-primary rounded-pill">@product.Price.ToString("C")</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Title</h5>
+                                <p class="card-text small text-muted">@product.Category</p>
+                                <p class="card-text">
+                                    @(product.Description.Length > 100 
+                                    ? product.Description.Substring(0, 100) + "..." 
+                                    : product.Description)
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">@product.Messages.Count beskeder</small>
+                                    <button class="btn btn-sm btn-outline-primary" @onclick:stopPropagation="true" @onclick="() => NavigateToProduct(product.Id)">
+                                        Se detaljer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <button class="btn btn-primary" @onclick="GoBack">Tilbage til detaljer</button>
+</div>
+
+@code {
+    private void NavigateToProduct(int productId)
+    {
+        NavigationManager.NavigateTo($"/solutions/product/{productId}");
+    }
+    
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/task/27");
+    }
+}
+
+<style>
+    .product-card {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+</style> 
