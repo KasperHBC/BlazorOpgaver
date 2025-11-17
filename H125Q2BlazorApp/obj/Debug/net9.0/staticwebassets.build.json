@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "extLLiskEgGjQ/hkSdlBNNDcc4ig+QB/K6/GXj5KjMs=",
+  "Hash": "xc4mgtZPR/JaTU2+JngsQG1kddKI3SzQZ+0x2uBMjfM=",
   "Source": "H125Q2BlazorApp",
   "BasePath": "_content/H125Q2BlazorApp",
   "Mode": "Default",
@@ -2138,6 +2138,27 @@
       "OriginalItemSpec": "wwwroot\\uploads\\a37e39bc-0b90-43c9-9850-fb7fdded2ad3.jpg"
     },
     {
+      "Identity": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\a6089744-35c7-4c07-847f-e37066d7444f.png",
+      "SourceId": "H125Q2BlazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\",
+      "BasePath": "_content/H125Q2BlazorApp",
+      "RelativePath": "uploads/a6089744-35c7-4c07-847f-e37066d7444f#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qk4njx64kr",
+      "Integrity": "6u3ZzCxLquNz6SYSmhPFuAjXiC9chzwGhIN8ADbUmnQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\a6089744-35c7-4c07-847f-e37066d7444f.png"
+    },
+    {
       "Identity": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\b8059f9d-e772-4f2b-8c1b-453f64192aa7.jpg",
       "SourceId": "H125Q2BlazorApp",
       "SourceType": "Discovered",
@@ -2159,6 +2180,27 @@
       "OriginalItemSpec": "wwwroot\\uploads\\b8059f9d-e772-4f2b-8c1b-453f64192aa7.jpg"
     },
     {
+      "Identity": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\df80716e-52c1-4d34-bbbd-ea57de099071.jpg",
+      "SourceId": "H125Q2BlazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\",
+      "BasePath": "_content/H125Q2BlazorApp",
+      "RelativePath": "uploads/df80716e-52c1-4d34-bbbd-ea57de099071#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zmbkpawgg4",
+      "Integrity": "65h/8HfKZSQCL0Babi/ur4+160vBYy2iY7g7vQaoXHA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\df80716e-52c1-4d34-bbbd-ea57de099071.jpg"
+    },
+    {
       "Identity": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\e95c4926-9666-4996-8bca-27074f52e726.png",
       "SourceId": "H125Q2BlazorApp",
       "SourceType": "Discovered",
@@ -2178,6 +2220,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\e95c4926-9666-4996-8bca-27074f52e726.png"
+    },
+    {
+      "Identity": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\eab21626-0c3f-4f13-bbde-b5b34eb69197.png",
+      "SourceId": "H125Q2BlazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\",
+      "BasePath": "_content/H125Q2BlazorApp",
+      "RelativePath": "uploads/eab21626-0c3f-4f13-bbde-b5b34eb69197#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gepsmjasb8",
+      "Integrity": "aO48424XEw+/G5pj1oe6fGJaFngFwWTir0ePFGpqSvE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\eab21626-0c3f-4f13-bbde-b5b34eb69197.png"
     }
   ],
   "Endpoints": [
@@ -16896,6 +16959,88 @@
       ]
     },
     {
+      "Route": "uploads/a6089744-35c7-4c07-847f-e37066d7444f.png",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\a6089744-35c7-4c07-847f-e37066d7444f.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2727646"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6u3ZzCxLquNz6SYSmhPFuAjXiC9chzwGhIN8ADbUmnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 06:50:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6u3ZzCxLquNz6SYSmhPFuAjXiC9chzwGhIN8ADbUmnQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/a6089744-35c7-4c07-847f-e37066d7444f.qk4njx64kr.png",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\a6089744-35c7-4c07-847f-e37066d7444f.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2727646"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6u3ZzCxLquNz6SYSmhPFuAjXiC9chzwGhIN8ADbUmnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 06:50:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qk4njx64kr"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/a6089744-35c7-4c07-847f-e37066d7444f.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6u3ZzCxLquNz6SYSmhPFuAjXiC9chzwGhIN8ADbUmnQ="
+        }
+      ]
+    },
+    {
       "Route": "uploads/b8059f9d-e772-4f2b-8c1b-453f64192aa7.bsowxqjyih.jpg",
       "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\b8059f9d-e772-4f2b-8c1b-453f64192aa7.jpg",
       "Selectors": [],
@@ -16978,6 +17123,88 @@
       ]
     },
     {
+      "Route": "uploads/df80716e-52c1-4d34-bbbd-ea57de099071.jpg",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\df80716e-52c1-4d34-bbbd-ea57de099071.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72415"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"65h/8HfKZSQCL0Babi/ur4+160vBYy2iY7g7vQaoXHA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 06:51:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-65h/8HfKZSQCL0Babi/ur4+160vBYy2iY7g7vQaoXHA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/df80716e-52c1-4d34-bbbd-ea57de099071.zmbkpawgg4.jpg",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\df80716e-52c1-4d34-bbbd-ea57de099071.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72415"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"65h/8HfKZSQCL0Babi/ur4+160vBYy2iY7g7vQaoXHA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 06:51:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmbkpawgg4"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/df80716e-52c1-4d34-bbbd-ea57de099071.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-65h/8HfKZSQCL0Babi/ur4+160vBYy2iY7g7vQaoXHA="
+        }
+      ]
+    },
+    {
       "Route": "uploads/e95c4926-9666-4996-8bca-27074f52e726.k2gs0m0t9d.png",
       "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\e95c4926-9666-4996-8bca-27074f52e726.png",
       "Selectors": [],
@@ -17056,6 +17283,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-XJgYb36lq0IBo4gDBioH1Rgi074b+Bl5Ej65jyzW6vg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/eab21626-0c3f-4f13-bbde-b5b34eb69197.gepsmjasb8.png",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\eab21626-0c3f-4f13-bbde-b5b34eb69197.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2512293"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aO48424XEw+/G5pj1oe6fGJaFngFwWTir0ePFGpqSvE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 07:36:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gepsmjasb8"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/eab21626-0c3f-4f13-bbde-b5b34eb69197.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aO48424XEw+/G5pj1oe6fGJaFngFwWTir0ePFGpqSvE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/eab21626-0c3f-4f13-bbde-b5b34eb69197.png",
+      "AssetFile": "C:\\Users\\kasc\\Documents\\GitHub\\H125Q2\\H125Q2BlazorApp\\wwwroot\\uploads\\eab21626-0c3f-4f13-bbde-b5b34eb69197.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2512293"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aO48424XEw+/G5pj1oe6fGJaFngFwWTir0ePFGpqSvE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 May 2025 07:36:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aO48424XEw+/G5pj1oe6fGJaFngFwWTir0ePFGpqSvE="
         }
       ]
     }
