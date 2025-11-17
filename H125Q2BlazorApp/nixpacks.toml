@@ -1,0 +1,17 @@
+[phases.setup]
+nixPkgs = ["dotnet-sdk_9", "dotnet-runtime_9"]
+
+[phases.install]
+cmds = [
+  "dotnet restore H125Q2BlazorApp.csproj",
+  "dotnet build H125Q2BlazorApp.csproj -c Release --no-restore"
+]
+
+[phases.build]
+cmds = [
+  "dotnet publish H125Q2BlazorApp.csproj -c Release -o ./publish --no-build"
+]
+
+[start]
+cmd = "dotnet ./publish/H125Q2BlazorApp.dll"
+

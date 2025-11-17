@@ -18,8 +18,10 @@ RUN dotnet publish "H125Q2BlazorApp.csproj" -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
 ENV ASPNETCORE_ENVIRONMENT=Production
+# Railway will set PORT environment variable at runtime
+# Use default port 8080, Railway will override with PORT env var
+ENV ASPNETCORE_URLS=http://+:8080
 
 COPY --from=publish /app/publish .
 
