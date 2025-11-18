@@ -54,7 +54,14 @@ else
                     <h5>Hints</h5>
                 </div>
                 <div class="card-body">
-                    <p>@Task.Hints</p>
+                    @if (!string.IsNullOrEmpty(Task.Hints))
+                    {
+                        <HintRenderer Hints="@Task.Hints" />
+                    }
+                    else
+                    {
+                        <p class="text-muted">Ingen hints tilgængelige for denne opgave.</p>
+                    }
                 </div>
             </div>
         </div>

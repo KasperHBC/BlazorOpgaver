@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("H125Q2BlazorApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a02a2ff3589af6af202a2f05a30effc2f9a49af6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86efc83d760d6845ebdad10a1405792cdcf3b3e5")]
 [assembly: System.Reflection.AssemblyProductAttribute("H125Q2BlazorApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("H125Q2BlazorApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

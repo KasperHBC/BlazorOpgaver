@@ -1,0 +1,127 @@
+@* Komponent til at formatere hints med kodeeksempler *@
+
+@if (!string.IsNullOrEmpty(Hints))
+{
+    <div class="hints-container">
+        @foreach (var line in GetFormattedLines(Hints))
+        {
+            @if (line.IsListItem)
+            {
+                <div class="mb-2 ms-3">
+                    <span class="text-primary fw-bold me-2">•</span> 
+                    @((MarkupString)line.Content)
+                </div>
+            }
+            else
+            {
+                <div class="mb-2">@((MarkupString)line.Content)</div>
+            }
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">Ingen hints tilgængelige.</p>
+}
+
+@code {
+    [Parameter]
+    public string Hints { get; set; } = string.Empty;
+
+    private List<FormattedLine> GetFormattedLines(string hints)
+    {
+        var lines = new List<FormattedLine>();
+        
+        if (string.IsNullOrWhiteSpace(hints))
+            return lines;
+            
+        var hintLines = hints.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        
+        foreach (var line in hintLines)
+        {
+            var trimmed = line.Trim();
+            
+            if (string.IsNullOrWhiteSpace(trimmed))
+                continue;
+            
+            // Tjek om linjen starter med "- " (bullet point)
+            if (trimmed.StartsWith("- "))
+            {
+                var content = trimmed.Substring(2).Trim();
+                lines.Add(new FormattedLine { Content = FormatCodeInText(content), IsListItem = true });
+            }
+            else
+            {
+                lines.Add(new FormattedLine { Content = FormatCodeInText(trimmed), IsListItem = false });
+            }
+        }
+        
+        return lines;
+    }
+
+    private string FormatCodeInText(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+            
+        // Erstat backticks med HTML code tags
+        var parts = new List<string>();
+        int start = 0;
+        
+        while (start < text.Length)
+        {
+            int backtickStart = text.IndexOf('`', start);
+            if (backtickStart == -1)
+            {
+                // Ingen flere backticks, tilføj resten som tekst
+                if (start < text.Length)
+                {
+                    parts.Add(EscapeHtml(text.Substring(start)));
+                }
+                break;
+            }
+            
+            // Tilføj tekst før backtick
+            if (backtickStart > start)
+            {
+                parts.Add(EscapeHtml(text.Substring(start, backtickStart - start)));
+            }
+            
+            // Find slutningen af koden
+            int backtickEnd = text.IndexOf('`', backtickStart + 1);
+            if (backtickEnd == -1)
+            {
+                // Ingen afsluttende backtick, tilføj resten som tekst
+                parts.Add(EscapeHtml(text.Substring(backtickStart)));
+                break;
+            }
+            
+            // Tilføj koden med HTML code tag
+            var codeContent = text.Substring(backtickStart + 1, backtickEnd - backtickStart - 1);
+            parts.Add($"<code class=\"text-danger fw-bold\">{EscapeHtml(codeContent)}</code>");
+            
+            start = backtickEnd + 1;
+        }
+        
+        return string.Join("", parts);
+    }
+
+    private string EscapeHtml(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+            
+        return text
+            .Replace("&", "&amp;")
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("\"", "&quot;")
+            .Replace("'", "&#39;");
+    }
+
+    private class FormattedLine
+    {
+        public string Content { get; set; } = string.Empty;
+        public bool IsListItem { get; set; }
+    }
+}

@@ -28,6 +28,14 @@ builder.Services.AddSingleton<ProductService>();
 // Registrer FavoriteService som scoped
 builder.Services.AddScoped<FavoriteService>();
 
+// Lyt på port fra environment variable (Railway sætter PORT)
+// ASP.NET Core læser automatisk PORT environment variable hvis ASPNETCORE_URLS ikke er sat
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port) && int.TryParse(port, out var portNumber))
+{
+    builder.WebHost.UseUrls($"http://+:{portNumber}");
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

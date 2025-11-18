@@ -89,3 +89,5 @@ C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\bin\Debug\net9.0\Microsoft
 C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\obj\Debug\net9.0\H125Q2BlazorApp.csproj.AssemblyReference.cache
 C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\obj\Debug\net9.0\H125Q2Bl.7ACCBC8B.Up2Date
 C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\obj\Debug\net9.0\H125Q2BlazorApp.sourcelink.json
+C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\bin\Debug\net9.0\appsettings.Production.json
+C:\Users\kasc\Documents\GitHub\H125Q2\H125Q2BlazorApp\bin\Debug\net9.0\railway.json
